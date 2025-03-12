@@ -34,12 +34,12 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeToBaseActions()
     {
-        inputActions.UI.Disable();
+        inputActions.Disable();
         inputActions.Base.Enable();
     }
     public void ChangeToUIActions()
     {
-        inputActions.Base.Disable();
+        inputActions.Disable();
         inputActions.UI.Enable();
     }
     private void OnEnable()
@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
     private void PauseGame(InputAction.CallbackContext callbackContext)
     {
         pausePannel.SetActive(true);
-        SetInputMap("UI");
+        //SetInputMap("UI");
+        ChangeToUIActions();
         Debug.Log("The game was paused");
     }
     public void TryResumeGame()
@@ -71,20 +72,8 @@ public class GameManager : MonoBehaviour
     private void ResumeGame()
     {
         pausePannel.SetActive(false);
-        SetInputMap("Base");
+        //SetInputMap("Base");
+        ChangeToBaseActions();
         Debug.Log("The game was continued");
-    }
-    private void SetInputMap(string mapName)
-    {
-        inputActions.Disable();
-
-        if (mapName == "Base")
-        {
-            inputActions.Base.Enable();
-        }
-        else if (mapName == "UI")
-        {
-            inputActions.UI.Enable();
-        }
     }
 }
