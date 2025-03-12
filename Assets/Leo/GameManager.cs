@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set; } //With this line we can know what currentState is, example: if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
     [SerializeField] private GameObject pausePannel;
 
-    private PenguinInputActions inputActions;
+    [SerializeField] private PlayerMovementScript playerScript;
     private void Awake()
     {
-        inputActions = new PenguinInputActions();
+
         pausePannel.SetActive(false);
         
         if (Instance == null)
@@ -34,25 +34,25 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeToBaseActions()
     {
-        inputActions.Disable();
-        inputActions.Base.Enable();
+        playerScript.inputActions.Disable();
+        playerScript.inputActions.Base.Enable();
     }
     public void ChangeToUIActions()
     {
-        inputActions.Disable();
-        inputActions.UI.Enable();
+        playerScript.inputActions.Disable();
+        playerScript.inputActions.UI.Enable();
     }
     private void OnEnable()
     {
-        inputActions.Base.Pause.started += PauseGame;
-        inputActions.UI.Resume.started += ResumeGame;
-        inputActions.Enable();
+        playerScript.inputActions.Base.Pause.started += PauseGame;
+        playerScript.inputActions.UI.Resume.started += ResumeGame;
+        playerScript.inputActions.Enable();
     }
     private void OnDisable()
     {
-        inputActions.Base.Pause.started -= PauseGame;
-        inputActions.UI.Resume.started -= ResumeGame;
-        inputActions.Disable();
+        playerScript.inputActions.Base.Pause.started -= PauseGame;
+        playerScript.inputActions.UI.Resume.started -= ResumeGame;
+        playerScript.inputActions.Disable();
     }
     private void PauseGame(InputAction.CallbackContext callbackContext)
     {

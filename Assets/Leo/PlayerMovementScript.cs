@@ -6,7 +6,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float limitXAndY;
     [SerializeField] private float velocity;
     private Rigidbody2D playerRB;
-    private void Awake()
+    public void Awake()
     {
         inputActions = new PenguinInputActions();
         playerRB = GetComponent<Rigidbody2D>();
