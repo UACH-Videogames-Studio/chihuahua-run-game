@@ -57,6 +57,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "9741c269-7577-4059-9140-f765cabb80b5",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "LR",
                     "id": "9ccba9a1-a92a-4d56-a79e-a3d6e31dbff7",
                     "path": "1DAxis",
@@ -121,6 +132,45 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "d8d228ba-1f9a-4887-bdfd-06ab6849733d",
+            "actions": [
+                {
+                    "name": "Resume",
+                    "type": "Button",
+                    "id": "0493e3ef-9965-4c23-9fbc-35fcee88a6c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d13144cf-ddca-411c-8334-058e327bd87d",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52a19459-507d-42b0-b760-49bc3faec1b5",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
