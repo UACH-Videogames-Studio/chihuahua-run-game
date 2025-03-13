@@ -4,6 +4,7 @@ using UnityEngine;
 public class ObstaclesGenerator : MonoBehaviour
 {
     [SerializeField] GameObject obstaclesLine;
+    public float generateTime = 1.0f;
 
     void Start()
     {
@@ -14,8 +15,14 @@ public class ObstaclesGenerator : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(obstaclesLine, new Vector3(0, 0, 0), Quaternion.identity);
-            yield return new WaitForSeconds(1.0f);
+            Instantiate(obstaclesLine, new Vector3(0, 7, 0), Quaternion.identity);
+            yield return new WaitForSeconds(generateTime);
+            generateTime += 0.1f;
         }
+    }
+
+    public void Test()
+    {
+        Debug.Log("Test");
     }
 }

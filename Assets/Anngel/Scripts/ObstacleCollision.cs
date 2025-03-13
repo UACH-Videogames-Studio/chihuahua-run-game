@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleCollision : MonoBehaviour
@@ -25,6 +26,9 @@ public class ObstacleCollision : MonoBehaviour
         SpriteRenderer playerSprite = player.GetComponent<SpriteRenderer>();
         int blinkCount = 15;
         float blinkDuration = 0.2f;
+
+        ObstaclesGenerator obstaclesGenerator = new ObstaclesGenerator();
+        obstaclesGenerator.generateTime = 1.0f;
 
         for (int i = 0; i < blinkCount; i++)
         {
