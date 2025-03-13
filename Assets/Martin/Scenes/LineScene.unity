@@ -256,6 +256,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523631101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523631103}
+  - component: {fileID: 523631102}
+  m_Layer: 0
+  m_Name: LaneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &523631102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523631101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b8fc18b8e26b74bb0df64713e38d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laneContainer: {fileID: 1203283225}
+--- !u!4 &523631103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523631101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.39213282, y: -0.79164946, z: -9.936792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203283225}
   m_Layer: 0
-  m_Name: LineContainer
+  m_Name: LaneContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +689,7 @@ GameObject:
   - component: {fileID: 2111056490}
   - component: {fileID: 2111056489}
   - component: {fileID: 2111056488}
-  - component: {fileID: 2111056493}
+  - component: {fileID: 2111056494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -796,7 +841,7 @@ Transform:
   - {fileID: 951555040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2111056493
+--- !u!114 &2111056494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -805,13 +850,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2111056487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e053d6df1203024dbe9f99c7e6b3b82, type: 3}
+  m_Script: {fileID: 11500000, guid: ee336392800b3dc47899cb14de8b245e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineContainer: {fileID: 1203283225}
-  linesPosition: []
-  actualPosition: {fileID: 0}
-  lineIndex: 1
+  laneManager: {fileID: 523631102}
+  currentLaneIndex: 1
   playerHorizontalSpeed: 10
   moveAction: {fileID: -3688147186906129984, guid: 79dd2ea2558ee3f44a646b99b76ee5fb, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -823,3 +866,4 @@ SceneRoots:
   - {fileID: 2111056491}
   - {fileID: 1769683657}
   - {fileID: 1203283225}
+  - {fileID: 523631103}
