@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ObstacleCollision : MonoBehaviour
 {
-    private Collider2D collider;
+    private Collider2D obstacleCollider;
 
     void Start()
     {
-        collider = GetComponent<Collider2D>();
+        obstacleCollider = GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
