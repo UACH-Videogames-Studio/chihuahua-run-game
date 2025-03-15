@@ -17,9 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pausePannel;
 
     [SerializeField] private PlayerMovementScript playerScript;
+    private PenguinInputActions inputActions;
     private void Awake()
     {
-
+        
         pausePannel.SetActive(false);
         
         if (Instance == null)
