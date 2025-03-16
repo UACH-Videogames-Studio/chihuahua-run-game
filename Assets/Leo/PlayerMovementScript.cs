@@ -5,11 +5,9 @@ public class PlayerMovementScript : MonoBehaviour
     [HideInInspector] public PenguinInputActions inputActions;
     [SerializeField] private float limitXAndY;
     [SerializeField] private float velocity;
-    private Rigidbody2D playerRB;
     public void Awake()
     {
         inputActions = new PenguinInputActions();
-        playerRB = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
     {
@@ -23,8 +21,9 @@ public class PlayerMovementScript : MonoBehaviour
     {
         float inputMovement = inputActions.Base.Movement.ReadValue<float>();
 
-        float newX = Mathf.Clamp(playerRB.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
+        float newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
+        //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
 
-        playerRB.MovePosition(new Vector2(newX, playerRB.position.y));
+        transform.position = new Vector2(newX, transform.position.y);
     }
 }
