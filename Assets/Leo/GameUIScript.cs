@@ -9,7 +9,7 @@ public class GameUIScript : MonoBehaviour
     [SerializeField] private float totalTimeLevel;
     [SerializeField] private float maximumbooster;
     [SerializeField] private float timeToWaitOfTheDeathBar;
-    private float counter, currentbooster, currentcounter, deathSpeed = 1f;
+    private float counter, currentbooster, currentcounter, deathSpeed = 1f, originalMaximumBooster, recoveryRate = 0.2f;
     private bool deathBarStart = false;
     private void Awake()
     {
@@ -21,6 +21,7 @@ public class GameUIScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        originalMaximumBooster = maximumbooster;
     }
     private void EndLevel()
     {
@@ -38,7 +39,7 @@ public class GameUIScript : MonoBehaviour
         }
         else
         {
-            maximumbooster -= momentum;
+            maximumbooster -= 3f * momentum;
         }
     }
     private void Update()
@@ -49,6 +50,10 @@ public class GameUIScript : MonoBehaviour
             currentbooster += Time.deltaTime;
         }
         */
+        if (maximumbooster < originalMaximumBooster)
+        {
+            maximumbooster += recoveryRate * Time.deltaTime;
+        }
         currentbooster = Mathf.Min(currentbooster + Time.deltaTime, maximumbooster); //The function Mathf.Min(a,b) gives you the minus value of two of them
         currentcounter += Time.deltaTime;
         if (currentcounter >= timeToWaitOfTheDeathBar)
