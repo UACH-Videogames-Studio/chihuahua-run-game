@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; } //With this line we can know what currentState is, example: if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
     [SerializeField] private GameObject pausePannel;
-
+    [SerializeField] private GameObject gamePannel;
     [SerializeField] private PlayerMovementScript playerScript;
     private PenguinInputActions inputActions;
     private void Awake()
     {
         
         pausePannel.SetActive(false);
+        gamePannel.SetActive(true);
         
         if (Instance == null)
         {
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour
     }
     private void PauseGame(InputAction.CallbackContext callbackContext)
     {
+        Time.timeScale = 0;
+        gamePannel.SetActive(false);
         pausePannel.SetActive(true);
         //SetInputMap("UI");
         ChangeToUIActions();
@@ -72,7 +75,9 @@ public class GameManager : MonoBehaviour
     }
     private void ResumeGame()
     {
+        Time.timeScale = 1;
         pausePannel.SetActive(false);
+        gamePannel.SetActive(true);
         //SetInputMap("Base");
         ChangeToBaseActions();
         Debug.Log("The game was continued");
