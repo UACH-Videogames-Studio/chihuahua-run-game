@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class MovementDown : MonoBehaviour
 {
-    [SerializeField] private float speed = 5.0f;
+    public float speed = 5.0f;
 
     void Update()
     {
         transform.position += Vector3.down * speed * Time.deltaTime;
+    }
+
+    void OnDestroy()
+    {
+        // Delete this object from allMovementScripts list
+        ObstaclesGenerator.allMovementScripts.Remove(this);
     }
 }

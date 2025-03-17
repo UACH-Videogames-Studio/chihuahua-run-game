@@ -27,8 +27,11 @@ public class ObstacleCollision : MonoBehaviour
         int blinkCount = 15;
         float blinkDuration = 0.2f;
 
-        ObstaclesGenerator obstaclesGenerator = new ObstaclesGenerator();
-        obstaclesGenerator.generateTime = 1.0f;
+        foreach (MovementDown movement in ObstaclesGenerator.allMovementScripts)
+        {
+            //Restore speed to "player movement" (really the world movement)
+            movement.speed = 3.0f;
+        }
 
         for (int i = 0; i < blinkCount; i++)
         {
