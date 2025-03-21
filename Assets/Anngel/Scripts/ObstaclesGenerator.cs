@@ -9,6 +9,8 @@ public class ObstaclesGenerator : MonoBehaviour
     public float speedIncrementDown = 0.1f;
     [SerializeField] private float destroyTime = 10f;
     public float pauseTime = 2.0f;
+    public static bool isSlowedDown = false; //verify if is slowed speed (obstacles)
+    [SerializeField] private float delayRegenerateSpeed = 1.5f;
 
     public static List<MovementDown> allMovementScripts = new List<MovementDown>();
     private Coroutine generateCoroutine;
@@ -27,6 +29,14 @@ public class ObstaclesGenerator : MonoBehaviour
             MovementDown[] movementScripts = obstaclesLine.GetComponentsInChildren<MovementDown>();
 
             allMovementScripts.AddRange(movementScripts);
+
+            if (isSlowedDown)
+            {
+                foreach (MovementDown movement in movementScripts)
+                {
+                    movement.speed = 0.5f;
+                }
+            }
 
             foreach (MovementDown movement in allMovementScripts)
             {
@@ -75,19 +85,31 @@ public class ObstaclesGenerator : MonoBehaviour
 
     public IEnumerator ResetObstaclesSpeed()
     {
+        isSlowedDown = true;
+
         // Important Work whit a copy List because work whit original List will cause a exception
         List<MovementDown> allMovementScriptsCopy = new List<MovementDown>(allMovementScripts);
 
         foreach (MovementDown movement in allMovementScriptsCopy)
         {
-            movement.speed = 0.5f; //Decrease speed to "player movement" (really the world movement)
+            if (movement != null)
+            {
+                movement.speed = 0.5f;
+                movement.targetSpeed = 0.5f;
+            }
+            //Decrease speed to "player movement" (really the world movement)
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(delayRegenerateSpeed);
 
+        isSlowedDown = false;
         foreach (MovementDown movement in allMovementScriptsCopy)
         {
-            movement.speed = 3f; //Restore speed to "player movement" (really the world movement)
+            if (movement != null)
+            {
+                movement.targetSpeed = 2f;
+            }
+            //Restore speed to "player movement" (really the world movement)
         }
     }
 
