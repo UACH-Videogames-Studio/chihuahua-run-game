@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2826eb3edf706d7429d637cb0d2889ac, type: 3}
+  m_Name: MenuScene
+  m_EditorClassIdentifier: 
+  dialogueTurnsList:
+  - Character: {fileID: 11400000, guid: a4d6fb36a260930498368cf16d89b3b5, type: 2}
+    dialogueLine: Hola!
+  - Character: {fileID: 11400000, guid: a4d6fb36a260930498368cf16d89b3b5, type: 2}
+    dialogueLine: Bienvenido a nuestro juego musical
+  - Character: {fileID: 11400000, guid: a4d6fb36a260930498368cf16d89b3b5, type: 2}
+    dialogueLine: Aqui iras desbloqueando minijuegos conforme avances en tu progreso

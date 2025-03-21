@@ -1,0 +1,67 @@
+{
+    "name": "DialogueActions",
+    "maps": [
+        {
+            "name": "NextDialogue",
+            "id": "03bc33e9-735b-4cc5-890b-7d580520ad95",
+            "actions": [
+                {
+                    "name": "NextDialogueAction",
+                    "type": "Button",
+                    "id": "3aeb6986-db55-447a-99d4-837a53661737",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f8bdda53-9e0c-4678-bff4-492e635af9bf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogueAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "280e10d9-26b2-4e29-9f96-e5950b11d77e",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogueAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ff2d5a8-ce0c-4e8a-8feb-601d2462bc76",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogueAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4dbc8601-0f31-4b43-a95e-739e0a3f1f56",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogueAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
