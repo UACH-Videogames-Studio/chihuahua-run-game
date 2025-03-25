@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class ObstaclesScript : MonoBehaviour
 {
+    [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The Scriptable object of this obstacle")] private ObstacleScriptableObject obstacleScriptableObject;
     //private Animator auxAnimator;
+    [Header("Variables that you dont have to change")][Space(10)]
+    [SerializeField][Tooltip("If it isn't assing, assign it in 40")] private float growingVelocityRegulator = 40;
     private float growingVelocity;
     private void Start()
     {
         //auxAnimator = GetComponent<Animator>();
         //auxAnimator = obstacleScriptableObject.ObstacleAnimator;
-        this.growingVelocity = obstacleScriptableObject.ImpactVelocity / 40;
+        this.growingVelocity = obstacleScriptableObject.ImpactVelocity / growingVelocityRegulator;
     }
     private void Update()
     {
