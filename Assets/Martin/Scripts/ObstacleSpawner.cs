@@ -1,13 +1,17 @@
 using UnityEngine;
-
 public class ObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private LaneManager laneManager;
+    //
+    private LaneManager laneManager;
     [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnDistanceForward = 20f;
     private float spawnTimer;
-    void Update()
+    private void Start()
+    {
+        laneManager = GetComponentInChildren<LaneManager>();
+    }
+    private void Update()
     {
         spawnTimer += Time.deltaTime;
         if (spawnTimer > spawnInterval)
@@ -16,7 +20,6 @@ public class ObstacleSpawner : MonoBehaviour
             SpawnObstacle();
         } 
     }
-
     private void SpawnObstacle()
     {
         if (laneManager == null || obstaclePrefab == null)

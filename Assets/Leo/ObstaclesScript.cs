@@ -10,8 +10,8 @@ public class ObstaclesScript : MonoBehaviour
     private float growingVelocity;
     private void Start()
     {
-        //auxAnimator = GetComponent<Animator>();
-        //auxAnimator = obstacleScriptableObject.ObstacleAnimator;
+        // auxAnimator = GetComponent<Animator>();
+        // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
         this.growingVelocity = obstacleScriptableObject.ImpactVelocity / growingVelocityRegulator;
     }
     private void Update()
@@ -19,15 +19,12 @@ public class ObstaclesScript : MonoBehaviour
         transform.position += Vector3.down * obstacleScriptableObject.ImpactVelocity * Time.deltaTime;
         transform.localScale += Vector3.one * growingVelocity * Time.deltaTime;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if(collision.gameObject.CompareTag("Player"))
         {
             GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);

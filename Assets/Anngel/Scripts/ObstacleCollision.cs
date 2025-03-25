@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleCollision : MonoBehaviour
@@ -19,8 +18,8 @@ public class ObstacleCollision : MonoBehaviour
         {
             //Todo
             // Add speed bar's substracion. Add crash effect sound. Restore line obstacle generator's speed
-            obstaclesGenerator.StartCoroutine(obstaclesGenerator.ResetObstaclesSpeed()); obstaclesGenerator.StopGenerating();
-
+            // obstaclesGenerator.StartCoroutine(obstaclesGenerator.ResetObstaclesSpeed());
+            // obstaclesGenerator.StopGenerating();
             StartCoroutine(CrashPlayer(collision.gameObject));
         }
     }
