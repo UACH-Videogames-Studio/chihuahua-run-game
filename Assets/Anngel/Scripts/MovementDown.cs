@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class MovementDown : MonoBehaviour
 {

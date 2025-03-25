@@ -4,11 +4,14 @@ using UnityEngine.UI;
 public class GameUIScript : MonoBehaviour
 {
     public static GameUIScript Instance { get; private set;} //This line is for the function QuitMoment, with Singleton design
+    [Header("Variables to assign")][Space(10)]
     [SerializeField] private Image progressLevelBar;
     [SerializeField] private Image progressDeathBar;
     [SerializeField] private float totalTimeLevel;
     [SerializeField] private float maximumbooster;
     [SerializeField] private float timeToWaitOfTheDeathBar;
+    [Header("Variables that you dont have to change")][Space(10)]
+    [SerializeField][Tooltip("If it isn't assing, assign it in 3")] private float momentumMultiplier = 3f;
     private float counter, currentbooster, currentcounter, deathSpeed = 1f, originalMaximumBooster, recoveryRate = 0.2f;
     private bool deathBarStart = false;
     private void Awake()
@@ -39,7 +42,7 @@ public class GameUIScript : MonoBehaviour
         }
         else
         {
-            maximumbooster -= 3f * momentum;
+            maximumbooster -= momentumMultiplier * momentum;
         }
     }
     private void Update()
