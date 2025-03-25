@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour
         while ( dialogueTurnsQueue.Count > 0)
         {
             var CurrentTurn = dialogueTurnsQueue.Dequeue();
-            dialogueUI.SetCharacterInfo(CurrentTurn.Character);
+            //dialogueUI.SetCharacterInfo(CurrentTurn.Character);
             dialogueUI.ClearDialogueArea();
 
             yield return StartCoroutine(TypeSentence(CurrentTurn.DialogueLine));
