@@ -2,20 +2,17 @@ using UnityEngine;
 
 public class ObstaclesScript : MonoBehaviour
 {
-    [Header("Variables to assign")]
-    [Space(10)]
+    //
+    [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The Scriptable object of this obstacle")] private ObstacleScriptableObject obstacleScriptableObject;
     //private Animator auxAnimator;
     [Header("Variables that you dont have to change")]
     [Space(10)]
     [SerializeField][Tooltip("If it isn't assing, assign it in 40")] private float growingVelocityRegulator = 40;
-    private float growingVelocity;
-
     [SerializeField] private float slowDownFactor = 0.5f;
     [SerializeField] private float speedRecoveryRate = 0.5f;
-    private float currentVelocity;
+    private float currentVelocity, growingVelocity;
     private bool isSlowed = false;
-
     private void Start()
     {
         // auxAnimator = GetComponent<Animator>();
@@ -36,17 +33,14 @@ public class ObstaclesScript : MonoBehaviour
                 isSlowed = false;
             }
         }
-
         transform.position += Vector3.down * currentVelocity * Time.deltaTime;
         transform.localScale += Vector3.one * growingVelocity * Time.deltaTime;
     }
-
     public void ApplySlowDown()
     {
         currentVelocity = obstacleScriptableObject.ImpactVelocity * slowDownFactor;
         isSlowed = true;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -59,7 +53,6 @@ public class ObstaclesScript : MonoBehaviour
             SlowDown.SlowAllObstacles();
         }
     }
-
     private void OnDestroy()
     {
         SlowDown.allMovementScripts.Remove(this);
