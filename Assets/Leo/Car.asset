@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Car
   m_EditorClassIdentifier: 
   name: Car
-  takeAwayMoment: 0.7
+  takeAwayMoment: 1
   impactVelocity: 2
   obstacleSprite: {fileID: 0}
   canBeJumped: 0
