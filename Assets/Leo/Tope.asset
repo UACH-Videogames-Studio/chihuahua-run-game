@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adfdecd4605f5204f945fb78bf74c85d, type: 3}
-  m_Name: Car
+  m_Name: Tope
   m_EditorClassIdentifier: 
-  name: Car
-  takeAwayMoment: 1
-  impactVelocity: 7
+  name: Tope
+  takeAwayMoment: 0.4
+  impactVelocity: 1.5
   obstacleSprite: {fileID: 0}
-  canBeJumped: 0
+  canBeJumped: 1
   obstacleAnimator: {fileID: 0}
