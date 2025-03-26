@@ -1,10 +1,10 @@
 using UnityEngine;
-
 public class PlayerMovementScript : MonoBehaviour
 {
     [HideInInspector] public PenguinInputActions inputActions;
-    [SerializeField] private float limitXAndY;
-    [SerializeField] private float velocity;
+    [Header("Variables to assign")][Space(10)]
+    [SerializeField][Tooltip("The default value is 8")] private float limitXAndY;
+    [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
     public void Awake()
     {
         inputActions = new PenguinInputActions();

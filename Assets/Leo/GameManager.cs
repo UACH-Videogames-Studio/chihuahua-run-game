@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;} //This line is our public acces for all of codes, if we need to change state we use something like: GameManager.Instance.ChangeState(GameManager.GameState.Playing)
-
     public enum GameState
     {
         MainMenu,
@@ -12,7 +10,6 @@ public class GameManager : MonoBehaviour
         Paused,
         GameOver
     }
-
     public GameState CurrentState { get; private set; } //With this line we can know what currentState is, example: if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
     [SerializeField] private GameObject pausePannel;
     [SerializeField] private GameObject gamePannel;
