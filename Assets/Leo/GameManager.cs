@@ -2,22 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set;} //This line is our public acces for all of codes, if we need to change state we use something like: GameManager.Instance.ChangeState(GameManager.GameState.Playing)
-    public enum GameState
-    {
-        MainMenu,
-        Playing,
-        Paused,
-        GameOver
-    }
-    public GameState CurrentState { get; private set; } //With this line we can know what currentState is, example: if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
-    [SerializeField] private GameObject pausePannel;
-    [SerializeField] private GameObject gamePannel;
-    [SerializeField] private PlayerMovementScript playerScript;
-    private PenguinInputActions inputActions;
+    public static GameManager Instance { get; private set;} //This line is our public acces for all of codes
+    [Header("Tha variables to assign")][Space(10)]
+    [SerializeField][Tooltip("Here goes the pause pannel in PlayerCanvas")] private GameObject pausePannel;
+    [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
+    [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
     private void Awake()
-    {
-        
+    {   
         pausePannel.SetActive(false);
         gamePannel.SetActive(true);
         
@@ -55,6 +46,14 @@ public class GameManager : MonoBehaviour
     }
     private void PauseGame(InputAction.CallbackContext callbackContext)
     {
+        PauseGame();
+    }
+    public void TryPauseGame()
+    {
+        PauseGame();
+    }
+    private void PauseGame()
+    {
         Time.timeScale = 0;
         gamePannel.SetActive(false);
         pausePannel.SetActive(true);
@@ -62,11 +61,11 @@ public class GameManager : MonoBehaviour
         ChangeToUIActions();
         Debug.Log("The game was paused");
     }
-    public void TryResumeGame()
+    private void ResumeGame(InputAction.CallbackContext callbackContext)
     {
         ResumeGame();
     }
-    private void ResumeGame(InputAction.CallbackContext callbackContext)
+    public void TryResumeGame()
     {
         ResumeGame();
     }

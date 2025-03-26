@@ -5,7 +5,8 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The default value is 8")] private float limitXAndY;
     [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
-    public void Awake()
+    private float inputMovement, newX;
+    private void Awake()
     {
         inputActions = new PenguinInputActions();
     }
@@ -19,9 +20,9 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        float inputMovement = inputActions.Base.Movement.ReadValue<float>();
+        inputMovement = inputActions.Base.Movement.ReadValue<float>();
 
-        float newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
+        newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
         //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
 
         transform.position = new Vector2(newX, transform.position.y);
