@@ -1,12 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
-    //
     private LaneManager laneManager;
-    [SerializeField] private GameObject obstaclePrefab;
+    [SerializeField] private List<GameObject> obstaclesPrefablist = new List<GameObject>();
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnDistanceForward = 20f;
     private float spawnTimer;
+    private int randomLaneIndex, randomPrefabIndex;
+    private GameObject auxGameObject;
     private void Start()
     {
         laneManager = GetComponentInChildren<LaneManager>();
@@ -22,17 +24,19 @@ public class ObstacleSpawner : MonoBehaviour
     }
     private void SpawnObstacle()
     {
-        if (laneManager == null || obstaclePrefab == null)
+        if (laneManager == null || obstaclesPrefablist == null || obstaclesPrefablist.Count == 0)
             return;
         
-        int randomLaneIndex = Random.Range(0, laneManager.GetLaneCount());
+        randomLaneIndex = Random.Range(0, laneManager.GetLaneCount());
         Transform choosenLaneTransform = laneManager.GetLaneAtIndex(randomLaneIndex);
-
         if (choosenLaneTransform == null)
             return;
 
+        randomPrefabIndex = Random.Range(0, obstaclesPrefablist.Count); //Get a random gameobject of the list
+        auxGameObject = obstaclesPrefablist[randomPrefabIndex]; //It assign it in a another variable
+
         Vector3 spawnPosition = choosenLaneTransform.position +Vector3.up * spawnDistanceForward;
 
-        Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
+        Instantiate(auxGameObject, spawnPosition, Quaternion.identity);
     }
 }
