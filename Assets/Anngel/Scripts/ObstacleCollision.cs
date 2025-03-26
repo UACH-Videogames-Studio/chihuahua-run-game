@@ -5,13 +5,11 @@ public class ObstacleCollision : MonoBehaviour
 {
     private Collider2D obstacleCollider;
     private ObstaclesGenerator obstaclesGenerator;
-
     void Start()
     {
         obstacleCollider = GetComponent<Collider2D>();
         obstaclesGenerator = FindFirstObjectByType<ObstaclesGenerator>();
     }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -23,7 +21,6 @@ public class ObstacleCollision : MonoBehaviour
             StartCoroutine(CrashPlayer(collision.gameObject));
         }
     }
-
     private IEnumerator CrashPlayer(GameObject player)
     {
         SpriteRenderer playerSprite = player.GetComponent<SpriteRenderer>();
