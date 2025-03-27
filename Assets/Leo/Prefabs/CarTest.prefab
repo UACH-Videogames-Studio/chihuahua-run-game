@@ -105,6 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleScriptableObject: {fileID: 11400000, guid: 71ff9e78468475c439976079c8a510de, type: 2}
   growingVelocityRegulator: 40
+  slowDownFactor: 0.5
+  speedRecoveryRate: 0.5
+  incrementSpeed: 0.5
+  limitVelocity: 20
 --- !u!61 &8502686204706287959
 BoxCollider2D:
   m_ObjectHideFlags: 0
