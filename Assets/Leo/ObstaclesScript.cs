@@ -13,12 +13,15 @@ public class ObstaclesScript : MonoBehaviour
     [SerializeField] private float speedRecoveryRate = 0.5f;
     private float currentVelocity, growingVelocity;
     private bool isSlowed = false;
+    [HideInInspector] public bool hasBeenAvoided = false;
+    private ObstacleCollision obstacleCollisionScript;
     private void Start()
     {
         // auxAnimator = GetComponent<Animator>();
         // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
         this.growingVelocity = obstacleScriptableObject.ImpactVelocity / growingVelocityRegulator;
         currentVelocity = obstacleScriptableObject.ImpactVelocity;
+        this.obstacleCollisionScript = GetComponent<ObstacleCollision>();
         SlowDown.allMovementScripts.Add(this);
     }
     private void Update()
@@ -49,12 +52,27 @@ public class ObstaclesScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
-            SlowDown.SlowAllObstacles();
+            if (collision.gameObject.CompareTag("Player")) 
+            {
+                if (obstacleScriptableObject.CanBeJumped && PlayerMovementScript.Instance.isJumping)
+                {
+                    AvoidTheObstacle();
+                }
+                else
+                {
+                    GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
+                    SlowDown.SlowAllObstacles();
+                }
+            }
         }
     }
     private void OnDestroy()
     {
         SlowDown.allMovementScripts.Remove(this);
+    }
+    private void AvoidTheObstacle()
+    {
+        this.hasBeenAvoided = true;
+        obstacleCollisionScript.enabled = false;
     }
 }
