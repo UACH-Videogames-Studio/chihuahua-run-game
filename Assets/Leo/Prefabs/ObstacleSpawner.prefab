@@ -354,7 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesPrefablist:
-  - {fileID: 2066924995526501283, guid: 8540d0f56bfef5d44aa9f0956c5e2f8c, type: 3}
   - {fileID: 6793311371315672896, guid: 31cd782eb477f164f959d9f899f1e6bb, type: 3}
   spawnInterval: 2
   spawnDistanceForward: 3

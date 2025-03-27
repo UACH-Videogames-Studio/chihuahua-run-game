@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2885102996341569125}
   m_Layer: 0
   m_Name: Tope
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   growingVelocityRegulator: 40
   slowDownFactor: 0.5
   speedRecoveryRate: 0.5
+  hasBeenAvoided: 0
 --- !u!61 &7563833824104584980
 BoxCollider2D:
   m_ObjectHideFlags: 0

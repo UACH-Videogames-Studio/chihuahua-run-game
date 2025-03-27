@@ -5,8 +5,10 @@ public class ObstacleCollision : MonoBehaviour
 {
     private Collider2D obstacleCollider;
     private ObstaclesGenerator obstaclesGenerator;
+    private ObstaclesScript obstaclesScript;
     void Start()
     {
+        obstaclesScript = GetComponent<ObstaclesScript>();
         obstacleCollider = GetComponent<Collider2D>();
         obstaclesGenerator = FindFirstObjectByType<ObstaclesGenerator>();
     }

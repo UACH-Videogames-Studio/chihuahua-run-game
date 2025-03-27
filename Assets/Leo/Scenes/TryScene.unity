@@ -408,6 +408,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limitXAndY: 8
   velocity: 12
+  timeCanJump: 2
+  inputMovement: 0
+  newX: 0
+  airTimeCounter: 0
+  isJumping: 0
+  boolthatrecivesPlayer: 0
+  boolthatsends: 0
 --- !u!60 &961866068
 PolygonCollider2D:
   m_ObjectHideFlags: 0

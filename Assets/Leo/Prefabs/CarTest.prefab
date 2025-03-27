@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1134709467523954894}
   m_Layer: 0
   m_Name: CarTest
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleScriptableObject: {fileID: 11400000, guid: 71ff9e78468475c439976079c8a510de, type: 2}
   growingVelocityRegulator: 40
+  slowDownFactor: 0.5
+  speedRecoveryRate: 0.5
+  hasBeenAvoided: 0
 --- !u!61 &8502686204706287959
 BoxCollider2D:
   m_ObjectHideFlags: 0
