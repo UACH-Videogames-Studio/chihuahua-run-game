@@ -18,26 +18,34 @@ public class ObstaclesScript : MonoBehaviour
     [SerializeField][Tooltip("If it isn't assing, assign it in 40")] private float growingVelocityRegulator = 40;
 
     private bool isSlowed = false;
+    private static float sharedCurrentVelocity; //static variable permit that current velocity is stay between news instances, and that not reset velocity at original value
     private float initialImpactVelocity;
-
 
     private void Awake()
     {
         initialImpactVelocity = obstacleScriptableObject.ImpactVelocity;
+
+        //if is first instance initialize with initialImpactVelocity of ObstacleScriptableObject
+        if (sharedCurrentVelocity == 0)
+        {
+            sharedCurrentVelocity = initialImpactVelocity;
+        }
+
+        currentVelocity = sharedCurrentVelocity;
     }
 
     private void Start()
     {
         // auxAnimator = GetComponent<Animator>();
         // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
-        this.growingVelocity = obstacleScriptableObject.ImpactVelocity / growingVelocityRegulator;
-        currentVelocity = obstacleScriptableObject.ImpactVelocity;
+        this.growingVelocity = sharedCurrentVelocity / growingVelocityRegulator;
         SlowDown.allMovementScripts.Add(this);
     }
     private void Update()
     {
-        currentVelocity += Time.deltaTime * incrementSpeed;
-        currentVelocity = Mathf.Min(currentVelocity, limitVelocity);
+        sharedCurrentVelocity += Time.deltaTime * incrementSpeed;
+        sharedCurrentVelocity = Mathf.Min(sharedCurrentVelocity, limitVelocity);
+        currentVelocity = sharedCurrentVelocity;
 
         if (isSlowed)
         {
@@ -54,7 +62,8 @@ public class ObstaclesScript : MonoBehaviour
     }
     public void ApplySlowDown()
     {
-        currentVelocity = obstacleScriptableObject.ImpactVelocity * slowDownFactor;
+        sharedCurrentVelocity = obstacleScriptableObject.ImpactVelocity * slowDownFactor;
+        currentVelocity = sharedCurrentVelocity;
         isSlowed = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -72,10 +81,5 @@ public class ObstaclesScript : MonoBehaviour
     private void OnDestroy()
     {
         SlowDown.allMovementScripts.Remove(this);
-    }
-
-    private void OnDisable()
-    {
-        obstacleScriptableObject.ImpactVelocity = initialImpactVelocity;
     }
 }
