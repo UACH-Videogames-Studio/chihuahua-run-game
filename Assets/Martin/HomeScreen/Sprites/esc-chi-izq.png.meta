@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 28985d3d8cc832e4c80ff53ced393e4c
+guid: e2e476b86438a854f86968a443b3bdfe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4053528204883397144
-    second: play-332_0
+      213: -4727531363620213534
+    second: esc-chi-izq_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: play-332_0
+      name: esc-chi-izq_0
       rect:
         serializedVersion: 2
-        x: 105
-        y: 72
-        width: 293
-        height: 368
+        x: 0
+        y: 0
+        width: 889
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e5f5ecf299feb7c0800000000000000
-      internalID: -4053528204883397144
+      spriteID: 2ec26e6b54f646eb0800000000000000
+      internalID: -4727531363620213534
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      play-332_0: -4053528204883397144
+      esc-chi-izq_0: -4727531363620213534
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
