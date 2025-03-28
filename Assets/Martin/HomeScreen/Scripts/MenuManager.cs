@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     [Header("Main menu")]
     //[SerializeField] private string gameNameScene;
     //[SerializeField] private GameObject optionsPanel;
+    [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private CanvasGroup mainMenuCanvasGroup;
     [SerializeField] private SceneTransitionManager sceneTransitionManager;
 
@@ -33,6 +35,7 @@ public class MenuManager : MonoBehaviour
         optionsCanvasGroup.blocksRaycasts = true;
         mainMenuCanvasGroup.interactable = false;
         mainMenuCanvasGroup.blocksRaycasts = false;
+        titleText.gameObject.SetActive(false);
     }
 
     public void QuitOptionsPanel()
@@ -42,6 +45,7 @@ public class MenuManager : MonoBehaviour
         optionsCanvasGroup.blocksRaycasts = false;
         mainMenuCanvasGroup.interactable = true;
         mainMenuCanvasGroup.blocksRaycasts = true;
+        titleText.gameObject.SetActive (true);
     }
 
 }
