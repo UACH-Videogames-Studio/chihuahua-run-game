@@ -43,6 +43,7 @@ public class ObstacleCollision : MonoBehaviour
         yield return new WaitForSeconds(obstaclesGenerator.pauseTime);
         obstaclesGenerator.RestartGenerating();
         activeCrashCourutine = null;
+        PlayerMovementScript.Instance.playerSpriteRenderer.enabled = true;
         
         IEnumerator BlinkRoutine()
         {
@@ -62,17 +63,18 @@ public class ObstacleCollision : MonoBehaviour
     }
     public void StopactiveCrashCourutine()
     {
-        if(activeCrashCourutine != null)
+        if (activeCrashCourutine != null)
         {
-            StopCoroutine(activeCrashCourutine); //Right here we stop our courutine
+            StopCoroutine(activeCrashCourutine);
             activeCrashCourutine = null;
         }
-        //This two lines is just in case the player sprite is disable
+
+        // Makes sure that te player is alwas visible
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             SpriteRenderer playerSprite = player.GetComponent<SpriteRenderer>();
-            if (playerSprite != null && !playerSprite.enabled) playerSprite.enabled = true;
+            if (playerSprite != null) playerSprite.enabled = true;
         }
     }
 }

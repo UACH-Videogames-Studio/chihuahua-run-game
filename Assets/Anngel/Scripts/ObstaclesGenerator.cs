@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstaclesGenerator : MonoBehaviour
 {
+    public static ObstaclesGenerator Instance { get; private set; }
     [SerializeField] GameObject obstaclesLine;
     public float generateTime = 1.0f;
     public float speedIncrementDown = 0.1f;
@@ -14,8 +15,18 @@ public class ObstaclesGenerator : MonoBehaviour
 
     public static List<MovementDown> allMovementScripts = new List<MovementDown>();
     private Coroutine generateCoroutine;
-
-    void Start()
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        } 
+        else 
+        {
+            Instance = this;
+        }
+    }
+    private void Start()
     {
         generateCoroutine = StartCoroutine(GenerateObstacles());
     }

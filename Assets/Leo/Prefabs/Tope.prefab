@@ -105,9 +105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleScriptableObject: {fileID: 11400000, guid: 05d81f82b77b20144b6c3d8e98de1989, type: 2}
-  growingVelocityRegulator: 40
   slowDownFactor: 0.5
   speedRecoveryRate: 0.5
+  incrementSpeed: 0.1
+  limitVelocity: 20
+  currentVelocity: 0
+  growingVelocity: 0
+  growingVelocityRegulator: 40
 --- !u!61 &7563833824104584980
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,11 +192,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6793311371315672896}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18f23578862717e47b854a447830ca38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkCount: 15
+  blinkDuration: 0.2
 --- !u!114 &2885102996341569125
 MonoBehaviour:
   m_ObjectHideFlags: 0

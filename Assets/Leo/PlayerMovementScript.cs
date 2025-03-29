@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovementScript : MonoBehaviour
@@ -9,10 +10,12 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
     [SerializeField][Tooltip("The time that the player can jump")] private float timeCanJump;
     [SerializeField][Tooltip("The time that the player is inmortal")] private float invulnerabilityTime;
+    [SerializeField][Tooltip("The blinks duration time")] private float blinkDuration = 0.2f;
     [HideInInspector] public bool isJumping;
-    private bool isInvencible;
+    private bool isInvencible, isACourutineStarted;
     private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
     private PolygonCollider2D playerCollider;
+    [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,8 +30,10 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void Start()
     {
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<PolygonCollider2D>();
-        isInvencible = false;   
+        isInvencible = false;
+        isACourutineStarted = false;
     }
     private void OnEnable()
     {
@@ -90,5 +95,22 @@ public class PlayerMovementScript : MonoBehaviour
         invencibleTimeCounter = 0f;
         playerCollider.enabled = false;
         isInvencible = true;
+        if (!isACourutineStarted)
+        {
+            StartCoroutine(BlinkCourutine());
+        }
+    }
+    private IEnumerator BlinkCourutine()
+    {
+        isACourutineStarted = true;
+        while (isInvencible)
+        {
+            playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+
+        playerSpriteRenderer.enabled = true;
+        isACourutineStarted = false;
+        ObstaclesGenerator.Instance.RestartGenerating();
     }
 }
