@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ObstaclesScript : MonoBehaviour
 {
-    //
     [Header("Variables to assign")]
     [Space(10)]
     [SerializeField][Tooltip("The Scriptable object of this obstacle")] private ObstacleScriptableObject obstacleScriptableObject;
@@ -12,15 +11,13 @@ public class ObstaclesScript : MonoBehaviour
     [SerializeField] private float limitVelocity = 20f;
     [SerializeField] private float currentVelocity, growingVelocity;
     //private Animator auxAnimator;
-
     [Header("Variables that you dont have to change")]
     [Space(10)]
     [SerializeField][Tooltip("If it isn't assing, assign it in 40")] private float growingVelocityRegulator = 40;
-
     private bool isSlowed = false;
     private static float sharedCurrentVelocity; //static variable permit that current velocity is stay between news instances, and that not reset velocity at original value
     private float initialImpactVelocity;
-
+    private ObstacleCollision obstacleCollision;
     private void Awake()
     {
         initialImpactVelocity = obstacleScriptableObject.ImpactVelocity;
@@ -33,11 +30,11 @@ public class ObstaclesScript : MonoBehaviour
 
         currentVelocity = sharedCurrentVelocity;
     }
-
     private void Start()
     {
         // auxAnimator = GetComponent<Animator>();
         // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
+        this.obstacleCollision = this.GetComponent<ObstacleCollision>();
         this.growingVelocity = sharedCurrentVelocity / growingVelocityRegulator;
         SlowDown.allMovementScripts.Add(this);
     }
@@ -74,12 +71,24 @@ public class ObstaclesScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
-            SlowDown.SlowAllObstacles();
+            if(obstacleScriptableObject.CanBeJumped && PlayerMovementScript.Instance.isJumping)
+            {
+                AvoidTheObstacle();
+            }
+            else
+            {
+                GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
+                SlowDown.SlowAllObstacles();
+            }
         }
     }
     private void OnDestroy()
     {
         SlowDown.allMovementScripts.Remove(this);
+    }
+    private void AvoidTheObstacle()
+    {
+        this.obstacleCollision.StopactiveCrashCourutine(); //Stops the courutine
+        this.obstacleCollision.enabled = false;
     }
 }
