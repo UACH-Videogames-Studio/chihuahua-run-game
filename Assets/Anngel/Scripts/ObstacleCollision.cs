@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
 public class ObstacleCollision : MonoBehaviour
 {
     [Header("Variables to assign")]
@@ -50,7 +49,11 @@ public class ObstacleCollision : MonoBehaviour
             for (int i = 0; i < blinkCount; i++)
             {
                 if (i == blinkCount - 1) playerSprite.enabled = true; //This line fixs partially the issue
-                if (!this.enabled) yield break;
+                if (!this.enabled)
+                {
+                    playerSprite.enabled = true;
+                    yield break;
+                }
                 playerSprite.enabled = !playerSprite.enabled;
                 yield return new WaitForSeconds(blinkDuration);
             }
@@ -62,11 +65,14 @@ public class ObstacleCollision : MonoBehaviour
         if(activeCrashCourutine != null)
         {
             StopCoroutine(activeCrashCourutine); //Right here we stop our courutine
-
-            //This two lines is just in case the player sprite is disable
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) player.GetComponent<SpriteRenderer>().enabled = true;
             activeCrashCourutine = null;
+        }
+        //This two lines is just in case the player sprite is disable
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            SpriteRenderer playerSprite = player.GetComponent<SpriteRenderer>();
+            if (playerSprite != null && !playerSprite.enabled) playerSprite.enabled = true;
         }
     }
 }

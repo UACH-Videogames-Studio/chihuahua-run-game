@@ -77,6 +77,7 @@ public class ObstaclesScript : MonoBehaviour
             }
             else
             {
+                PlayerMovementScript.Instance.HasBeenHitten();
                 GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
                 SlowDown.SlowAllObstacles();
             }

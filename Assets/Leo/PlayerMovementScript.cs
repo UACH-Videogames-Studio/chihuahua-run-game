@@ -8,8 +8,11 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField][Tooltip("The default value is 8")] private float limitXAndY;
     [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
     [SerializeField][Tooltip("The time that the player can jump")] private float timeCanJump;
+    [SerializeField][Tooltip("The time that the player is inmortal")] private float invulnerabilityTime;
     [HideInInspector] public bool isJumping;
-    private float inputMovement, newX, airTimeCounter = 0f;
+    private bool isInvencible;
+    private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
+    private PolygonCollider2D playerCollider;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,6 +24,11 @@ public class PlayerMovementScript : MonoBehaviour
             Instance = this;
         }
         inputActions = new PenguinInputActions();
+    }
+    private void Start()
+    {
+        playerCollider = GetComponent<PolygonCollider2D>();
+        isInvencible = false;   
     }
     private void OnEnable()
     {
@@ -43,6 +51,14 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void Update()
     {
+        if (isInvencible)
+        {
+            invencibleTimeCounter += Time.deltaTime;
+            if (invencibleTimeCounter >= invulnerabilityTime)
+            {
+                Vulnerable();
+            }
+        }
         if (isJumping)
         {
             airTimeCounter += Time.deltaTime;
@@ -63,5 +79,16 @@ public class PlayerMovementScript : MonoBehaviour
     private void Land()
     {
         isJumping = false;
+    }
+    private void Vulnerable()
+    {
+        playerCollider.enabled = true;
+        isInvencible = false;
+    }
+    public void HasBeenHitten()
+    {
+        invencibleTimeCounter = 0f;
+        playerCollider.enabled = false;
+        isInvencible = true;
     }
 }
