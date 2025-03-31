@@ -20,6 +20,7 @@ public class ObstaclesGenerator : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         } 
         else 
         {

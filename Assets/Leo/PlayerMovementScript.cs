@@ -22,6 +22,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         } 
         else 
         {
@@ -110,7 +111,6 @@ public class PlayerMovementScript : MonoBehaviour
             playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled;
             yield return new WaitForSeconds(blinkDuration);
         }
-
         playerSpriteRenderer.enabled = true;
         isACourutineStarted = false;
         ObstaclesGenerator.Instance.RestartGenerating();
