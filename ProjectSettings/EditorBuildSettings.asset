@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Martin/Scenes/AnimTest.unity
     guid: ee39d4640a2f7ea409d2eca737464472
   - enabled: 1
+    path: Assets/Leo/Scenes/TemporalyLevel.unity
+    guid: 5bc746c7b716c8c408d5b713a886b4de
+  - enabled: 1
     path: Assets/Martin/Scenes/ComicScene.unity
     guid: c421b19cfaa3ea04ea3af952cbde779f
   m_configObjects:
