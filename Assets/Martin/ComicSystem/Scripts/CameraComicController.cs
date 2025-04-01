@@ -14,18 +14,11 @@ public class CameraComicController : MonoBehaviour
 
     [Header("Next Scene")]
     [SerializeField] private Button nextButton;
-    //[SerializeField] private string nextScene = "Nivel";
 
     private Camera cam;
     private int currentIndex = 0;
     private bool isTransitioning = false;
 
-    //private void Awake()
-    //{
-        
-    //    cam = GetComponent<Camera>();
-        
-    //}
 
     private void Start()
     {
@@ -65,14 +58,44 @@ public class CameraComicController : MonoBehaviour
         }
     }
 
+    //public void NextPanel()
+    //{
+    //    if (isTransitioning) return;
+
+    //    currentIndex++;
+    //    if (currentIndex >= cameraPositions.Length)
+    //    {
+    //        //SceneManager.LoadScene(nextScene);
+    //        nextButton.gameObject.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        isTransitioning = true;
+    //    }
+    //}
+
     public void NextPanel()
     {
-        if (isTransitioning) return;
+        if (cameraPositions == null || cameraPositions.Length == 0) return;
+
+        if (isTransitioning)
+        {
+            Transform target = cameraPositions[currentIndex];
+            CameraPositionData data = target.GetComponent<CameraPositionData>();
+            transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+
+            if (data != null)
+            {
+                cam.orthographicSize = data.orthoSize;
+            }
+
+            isTransitioning = false;
+            return;
+        }
 
         currentIndex++;
         if (currentIndex >= cameraPositions.Length)
         {
-            //SceneManager.LoadScene(nextScene);
             nextButton.gameObject.SetActive(true);
         }
         else
@@ -80,7 +103,6 @@ public class CameraComicController : MonoBehaviour
             isTransitioning = true;
         }
     }
-
     private void MoveCameraToTarget()
     {
         Transform target = cameraPositions[currentIndex];
