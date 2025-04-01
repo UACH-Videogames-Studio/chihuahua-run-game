@@ -3243,7 +3243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4994963526624448076, guid: 094c70e7518a682418798aea9b761c01, type: 3}
       propertyPath: nextSceneName
-      value: AnimTest
+      value: ComicScene
       objectReference: {fileID: 0}
     - target: {fileID: 4994963526624448076, guid: 094c70e7518a682418798aea9b761c01, type: 3}
       propertyPath: transitionTime

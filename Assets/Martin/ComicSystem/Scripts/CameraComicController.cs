@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CameraComicController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class CameraComicController : MonoBehaviour
     [SerializeField] private float zoomSpeed = 2f;
 
     [Header("Next Scene")]
-    [SerializeField] private string nextScene = "Nivel";
+    [SerializeField] private Button nextButton;
+    //[SerializeField] private string nextScene = "Nivel";
 
     private Camera cam;
     private int currentIndex = 0;
@@ -27,6 +29,7 @@ public class CameraComicController : MonoBehaviour
 
     private void Start()
     {
+        nextButton.gameObject.SetActive(false);
         cam = GetComponent<Camera>();
         foreach (Transform transform in cameraPositions)
         {
@@ -69,7 +72,8 @@ public class CameraComicController : MonoBehaviour
         currentIndex++;
         if (currentIndex >= cameraPositions.Length)
         {
-            SceneManager.LoadScene(nextScene);
+            //SceneManager.LoadScene(nextScene);
+            nextButton.gameObject.SetActive(true);
         }
         else
         {
