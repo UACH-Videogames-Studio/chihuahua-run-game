@@ -15,12 +15,14 @@ public class PlayerMovementScript : MonoBehaviour
     private bool isInvencible, isACourutineStarted;
     private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
     private PolygonCollider2D playerCollider;
+    private Animator playerAnimator;
     [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         } 
         else 
         {
@@ -32,6 +34,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<PolygonCollider2D>();
+        playerAnimator = GetComponent<Animator>();
         isInvencible = false;
         isACourutineStarted = false;
     }
@@ -108,7 +111,6 @@ public class PlayerMovementScript : MonoBehaviour
             playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled;
             yield return new WaitForSeconds(blinkDuration);
         }
-
         playerSpriteRenderer.enabled = true;
         isACourutineStarted = false;
         ObstaclesGenerator.Instance.RestartGenerating();
