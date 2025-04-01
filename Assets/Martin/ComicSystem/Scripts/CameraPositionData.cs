@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CameraPositionData : MonoBehaviour
 {
     [Header("Ortho size")]
-    [SerializeField] public float orthoSize = 5f;
+    public float orthoSize = 5f;
 
     [Header("Image")]
     public Image targetImage;
