@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue Character", menuName = "FirstMinigame/DialogueSystem/ScriptableObjects/DialogueCharacter")]
+[CreateAssetMenu(fileName = "New Dialogue Character", menuName = "ScriptableObjects/DialogueSystem/DialogueCharacter")]
 public class DialogueCharacterSO : ScriptableObject
 {
     [Header("Character Info")]
