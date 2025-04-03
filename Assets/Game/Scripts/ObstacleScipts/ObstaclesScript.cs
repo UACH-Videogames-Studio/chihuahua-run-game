@@ -17,7 +17,8 @@ public class ObstaclesScript : MonoBehaviour
     private bool isSlowed = false;
     private static float sharedCurrentVelocity; //static variable permit that current velocity is stay between news instances, and that not reset velocity at original value
     private float initialImpactVelocity, currentSize, currentgrowingVelocity;
-    private ObstacleCollision obstacleCollision;
+    private int side;
+    // private ObstacleCollision obstacleCollision;
     //
     private void Awake()
     {
@@ -33,11 +34,22 @@ public class ObstaclesScript : MonoBehaviour
     {
         // auxAnimator = GetComponent<Animator>();
         // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
-        this.obstacleCollision = this.GetComponent<ObstacleCollision>();
+        //this.obstacleCollision = this.GetComponent<ObstacleCollision>();
         // this.growingVelocity = sharedCurrentVelocity / growingVelocityRegulator;
         SlowDown.allMovementScripts.Add(this);
         currentSize = 0;
         growingVelocityRegulator = 1;
+    }
+    private void OnEnable()
+    {
+        if (!this.obstacleScriptableObject.IsStatic)
+        {
+            this.side = Random.Range(-1, 2);
+        }
+        else
+        {
+            this.side = 0;
+        }
     }
     private void Update()
     {
@@ -48,7 +60,6 @@ public class ObstaclesScript : MonoBehaviour
         if (isSlowed)
         {
             currentVelocity = Mathf.Lerp(currentVelocity, obstacleScriptableObject.ImpactVelocity, speedRecoveryRate * Time.deltaTime);
-
             if (Mathf.Abs(currentVelocity - obstacleScriptableObject.ImpactVelocity) < 0.1f)
             {
                 currentVelocity = obstacleScriptableObject.ImpactVelocity;
@@ -56,12 +67,13 @@ public class ObstaclesScript : MonoBehaviour
                 isSlowed = false;
             }
         }
-        transform.position += Vector3.down * currentVelocity * Time.deltaTime;
+        // transform.position += Vector3.down * currentVelocity * Time.deltaTime;
+        transform.position += new Vector3(currentVelocity * Time.deltaTime * side, -1 * currentVelocity * Time.deltaTime, 0);
         // transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * Time.deltaTime;
-        if (currentSize <= this.obstacleScriptableObject.MaximumSize)
+        if (this.currentSize <= this.obstacleScriptableObject.MaximumSize)
         {
-            transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * growingVelocityRegulator  * Time.deltaTime;
-            currentSize = transform.localScale.x;
+            this.transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * growingVelocityRegulator  * Time.deltaTime;
+            this.currentSize = transform.localScale.x;
         }
     }
     public void ApplySlowDown()

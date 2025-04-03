@@ -13,6 +13,8 @@ public class ObstacleScriptableObject : ScriptableObject
     // public Sprite ObstacleSprite { get => obstacleSprite; private set => obstacleSprite = value; }
     [SerializeField] private bool canBeJumped;
     public bool CanBeJumped { get => canBeJumped; private set => canBeJumped = value; }
+    [SerializeField] private bool isStatic;
+    public bool IsStatic { get => isStatic; private set => isStatic = value; }
     // [SerializeField] private Animator obstacleAnimator;
     // public Animator ObstacleAnimator { get => obstacleAnimator; private set => obstacleAnimator = value; }
     [SerializeField] private float growingVelocity;
