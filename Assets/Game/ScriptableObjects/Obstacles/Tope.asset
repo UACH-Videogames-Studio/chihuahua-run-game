@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tope
   takeAwayMoment: 0.4
-  impactVelocity: 2
-  obstacleSprite: {fileID: 0}
+  impactVelocity: 1
   canBeJumped: 1
-  obstacleAnimator: {fileID: 0}
+  growingVelocity: 0.5
+  maximumSize: 2

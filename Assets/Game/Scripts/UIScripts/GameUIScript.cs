@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class GameUIScript : MonoBehaviour
 {
     public static GameUIScript Instance { get; private set;} //This line is for the function QuitMoment, with Singleton design
@@ -28,7 +27,6 @@ public class GameUIScript : MonoBehaviour
     }
     private void EndLevel()
     {
-        Debug.Log("El nivel se ha acabado");
     }
     private void LoseLevel()
     {

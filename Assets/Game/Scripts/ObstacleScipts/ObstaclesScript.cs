@@ -16,18 +16,17 @@ public class ObstaclesScript : MonoBehaviour
     [SerializeField][Tooltip("If it isn't assing, assign it in 40")] private float growingVelocityRegulator = 40;
     private bool isSlowed = false;
     private static float sharedCurrentVelocity; //static variable permit that current velocity is stay between news instances, and that not reset velocity at original value
-    private float initialImpactVelocity;
+    private float initialImpactVelocity, currentSize, currentgrowingVelocity;
     private ObstacleCollision obstacleCollision;
+    //
     private void Awake()
     {
         initialImpactVelocity = obstacleScriptableObject.ImpactVelocity;
-
         //if is first instance initialize with initialImpactVelocity of ObstacleScriptableObject
         if (sharedCurrentVelocity == 0)
         {
             sharedCurrentVelocity = initialImpactVelocity;
         }
-
         currentVelocity = sharedCurrentVelocity;
     }
     private void Start()
@@ -35,8 +34,10 @@ public class ObstaclesScript : MonoBehaviour
         // auxAnimator = GetComponent<Animator>();
         // auxAnimator = obstacleScriptableObject.ObstacleAnimator;
         this.obstacleCollision = this.GetComponent<ObstacleCollision>();
-        this.growingVelocity = sharedCurrentVelocity / growingVelocityRegulator;
+        // this.growingVelocity = sharedCurrentVelocity / growingVelocityRegulator;
         SlowDown.allMovementScripts.Add(this);
+        currentSize = 0;
+        growingVelocityRegulator = 1;
     }
     private void Update()
     {
@@ -51,16 +52,23 @@ public class ObstaclesScript : MonoBehaviour
             if (Mathf.Abs(currentVelocity - obstacleScriptableObject.ImpactVelocity) < 0.1f)
             {
                 currentVelocity = obstacleScriptableObject.ImpactVelocity;
+                growingVelocityRegulator = 1;
                 isSlowed = false;
             }
         }
         transform.position += Vector3.down * currentVelocity * Time.deltaTime;
-        transform.localScale += Vector3.one * growingVelocity * Time.deltaTime;
+        // transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * Time.deltaTime;
+        if (currentSize <= this.obstacleScriptableObject.MaximumSize)
+        {
+            transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * growingVelocityRegulator  * Time.deltaTime;
+            currentSize = transform.localScale.x;
+        }
     }
     public void ApplySlowDown()
     {
         sharedCurrentVelocity = obstacleScriptableObject.ImpactVelocity * slowDownFactor;
         currentVelocity = sharedCurrentVelocity;
+        growingVelocityRegulator = sharedCurrentVelocity;
         isSlowed = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -89,7 +97,7 @@ public class ObstaclesScript : MonoBehaviour
     }
     private void AvoidTheObstacle()
     {
-        this.obstacleCollision.StopactiveCrashCourutine(); //Stops the courutine
-        this.obstacleCollision.enabled = false;
+        // this.obstacleCollision.StopactiveCrashCourutine(); //Stops the courutine
+        // this.obstacleCollision.enabled = false;
     }
 }
