@@ -11,6 +11,18 @@ public class ObstacleSpawner : MonoBehaviour
     private float spawnTimer;
     private int randomLaneIndex, randomPrefabIndex;
     private GameObject auxGameObject;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+        } 
+        else 
+        {
+            Instance = this;
+        }
+    }
     private void SpawnObstacle()
     {
         if (laneManager == null || obstaclesPrefablist == null || obstaclesPrefablist.Count == 0) return;

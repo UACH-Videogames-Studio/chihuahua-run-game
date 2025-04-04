@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tope
   takeAwayMoment: 0.4
-  impactVelocity: 1
+  impactVelocity: 0.002
   canBeJumped: 1
   isStatic: 1
-  growingVelocity: 0.5
+  growingVelocity: 0.1
   maximumSize: 2

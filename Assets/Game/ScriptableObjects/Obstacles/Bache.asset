@@ -16,5 +16,6 @@ MonoBehaviour:
   takeAwayMoment: 0.5
   impactVelocity: 1.4
   canBeJumped: 1
+  isStatic: 0
   growingVelocity: 0.6
   maximumSize: 1.5
