@@ -50,18 +50,9 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        inputMovement = inputActions.Base.Movement.ReadValue<float>();
-
-        newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
-        //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
-
-        transform.position = new Vector2(newX, transform.position.y);
-    }
-    private void Update()
-    {
         if (isInvencible)
         {
-            invencibleTimeCounter += Time.deltaTime;
+            invencibleTimeCounter += Time.fixedDeltaTime * GameManager.Instance.timeMultiplier;
             if (invencibleTimeCounter >= invulnerabilityTime)
             {
                 Vulnerable();
@@ -69,12 +60,16 @@ public class PlayerMovementScript : MonoBehaviour
         }
         if (isJumping)
         {
-            airTimeCounter += Time.deltaTime;
+            airTimeCounter += Time.fixedDeltaTime * GameManager.Instance.timeMultiplier;
             if (airTimeCounter >= timeCanJump)
             {
                 Land();
             }
         }
+        inputMovement = inputActions.Base.Movement.ReadValue<float>();
+        newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.fixedDeltaTime * GameManager.Instance.timeMultiplier), -limitXAndY, limitXAndY);
+        //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
+        transform.position = new Vector2(newX, transform.position.y);
     }
     private void Jump(InputAction.CallbackContext context)
     {
@@ -92,9 +87,11 @@ public class PlayerMovementScript : MonoBehaviour
     {
         playerCollider.enabled = true;
         isInvencible = false;
+        GameManager.Instance.ApplyFastUp();
     }
     public void HasBeenHitten()
     {
+        GameManager.Instance.ApplySlowDown();
         invencibleTimeCounter = 0f;
         playerCollider.enabled = false;
         isInvencible = true;
@@ -109,7 +106,7 @@ public class PlayerMovementScript : MonoBehaviour
         while (isInvencible)
         {
             playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled;
-            yield return new WaitForSeconds(blinkDuration);
+            yield return new WaitForSecondsRealtime(blinkDuration);
         }
         playerSpriteRenderer.enabled = true;
         isACourutineStarted = false;

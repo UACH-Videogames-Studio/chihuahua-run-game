@@ -3,11 +3,13 @@ public class ObstaclesMovementScript : MonoBehaviour
 {
     [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The Scriptable object of this obstacle")] private ObstacleScriptableObject obstacleScriptableObject;
+    private AudioSource obstacleAudioSource;
     private float currentSize;
     private int side;
     private void Start()
     {
         currentSize = 0;
+        obstacleAudioSource = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
@@ -39,6 +41,10 @@ public class ObstaclesMovementScript : MonoBehaviour
         {
             if (!this.obstacleScriptableObject.CanBeJumped || !PlayerMovementScript.Instance.isJumping)
             {
+                if(this.obstacleScriptableObject.ObstacleAudioHit != null)
+                {
+                    this.obstacleAudioSource.PlayOneShot(this.obstacleScriptableObject.ObstacleAudioHit);
+                }
                 PlayerMovementScript.Instance.HasBeenHitten();
                 GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
             }

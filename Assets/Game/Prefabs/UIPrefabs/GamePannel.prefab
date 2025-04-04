@@ -646,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressLevelBar: {fileID: 5234919695135487134}
   progressDeathBar: {fileID: 6413523901539037836}
-  totalTimeLevel: 30
+  totalTimeLevel: 80
   maximumbooster: 3
-  timeToWaitOfTheDeathBar: 2
+  timeToWaitOfTheDeathBar: 2.5
   momentumMultiplier: 3
