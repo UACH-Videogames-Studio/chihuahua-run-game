@@ -22,7 +22,7 @@ public class ObstaclesScript : MonoBehaviour
     //
     private void Awake()
     {
-        initialImpactVelocity = obstacleScriptableObject.ImpactVelocity;
+        initialImpactVelocity = this.obstacleScriptableObject.ImpactVelocity;
         //if is first instance initialize with initialImpactVelocity of ObstacleScriptableObject
         if (sharedCurrentVelocity == 0)
         {
@@ -72,7 +72,7 @@ public class ObstaclesScript : MonoBehaviour
         // transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * Time.deltaTime;
         if (this.currentSize <= this.obstacleScriptableObject.MaximumSize)
         {
-            this.transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * growingVelocityRegulator  * Time.deltaTime;
+            this.transform.localScale += Vector3.one * this.obstacleScriptableObject.GrowingVelocity * this.growingVelocityRegulator  * Time.deltaTime;
             this.currentSize = transform.localScale.x;
         }
     }
@@ -91,7 +91,7 @@ public class ObstaclesScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(obstacleScriptableObject.CanBeJumped && PlayerMovementScript.Instance.isJumping)
+            if(this.obstacleScriptableObject.CanBeJumped && PlayerMovementScript.Instance.isJumping)
             {
                 AvoidTheObstacle();
             }
