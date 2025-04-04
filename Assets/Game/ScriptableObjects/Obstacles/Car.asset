@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Car
   takeAwayMoment: 1
-  impactVelocity: 3
+  impactVelocity: 4
   canBeJumped: 0
-  growingVelocity: 0.25
+  isStatic: 0
+  growingVelocity: 0.4
   maximumSize: 0.72

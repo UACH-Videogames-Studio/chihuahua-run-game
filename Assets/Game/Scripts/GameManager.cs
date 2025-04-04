@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField][Tooltip("Here goes the pause pannel in PlayerCanvas")] private GameObject pausePannel;
     [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
     [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
+    [HideInInspector] public float timeMultiplier;
     private void Awake()
     {   
         pausePannel.SetActive(false);
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        timeMultiplier = 1;
     }
     public void ChangeToBaseActions()
     {
@@ -77,5 +79,17 @@ public class GameManager : MonoBehaviour
         //SetInputMap("Base");
         ChangeToBaseActions();
         Debug.Log("The game was continued");
+    }
+    public void ApplySlowDown()
+    {
+        timeMultiplier = 2;
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime = 0.01f;
+    }
+    public void ApplyFastUp()
+    {
+        timeMultiplier = 1;
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
     }
 }

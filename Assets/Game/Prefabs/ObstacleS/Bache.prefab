@@ -184,12 +184,12 @@ GameObject:
   m_Component:
   - component: {fileID: 335517833509702550}
   - component: {fileID: 5915550403763288291}
-  - component: {fileID: 4926913804053204458}
   - component: {fileID: 49105075112689675}
   - component: {fileID: -8360611886110968226}
+  - component: {fileID: 6847680846964671346}
   m_Layer: 0
   m_Name: Bache
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +255,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1231211826536416617, guid: d63b772565352df4d9320eb1643bc746, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -267,26 +267,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4926913804053204458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7530891122686824688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8875d34d043cbf84f8a575d4ac47f9b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleScriptableObject: {fileID: 11400000, guid: 4ea740082442cc541922a8af8465339d, type: 2}
-  slowDownFactor: 0.5
-  speedRecoveryRate: 0.5
-  incrementSpeed: 0.1
-  limitVelocity: 20
-  currentVelocity: 0
-  growingVelocity: 0
-  growingVelocityRegulator: 40
 --- !u!61 &49105075112689675
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -321,7 +301,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018518925, y: 0.5382495}
+  m_Offset: {x: -0.00000035762787, y: 0.013556063}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -331,7 +311,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.5698843, y: 2.7764988}
+  m_Size: {x: 1.4834559, y: 1.8752605}
   m_EdgeRadius: 0
 --- !u!50 &-8360611886110968226
 Rigidbody2D:
@@ -360,6 +340,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6847680846964671346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530891122686824688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6395938b2f6eb94bab65232d07e93b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleScriptableObject: {fileID: 11400000, guid: 4ea740082442cc541922a8af8465339d, type: 2}
 --- !u!1 &7539458039257340807
 GameObject:
   m_ObjectHideFlags: 0
