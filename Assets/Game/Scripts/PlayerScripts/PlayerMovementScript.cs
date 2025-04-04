@@ -5,8 +5,7 @@ public class PlayerMovementScript : MonoBehaviour
 {
     public static PlayerMovementScript Instance { get; private set; }
     [HideInInspector] public PenguinInputActions inputActions;
-    [Header("Variables to assign")]
-    [Space(10)]
+    [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The default value is 8")] private float limitXAndY;
     [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
     [SerializeField][Tooltip("The time that the player can jump")] private float timeCanJump;

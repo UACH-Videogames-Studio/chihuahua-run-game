@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bache
   takeAwayMoment: 0.5
-  impactVelocity: 1.4
+  impactVelocity: 2
   canBeJumped: 1
   isStatic: 0
   growingVelocity: 0.6
