@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adfdecd4605f5204f945fb78bf74c85d, type: 3}
-  m_Name: Car
+  m_Name: Bache
   m_EditorClassIdentifier: 
-  name: Car
-  takeAwayMoment: 1
-  impactVelocity: 3
-  canBeJumped: 0
-  growingVelocity: 0.25
-  maximumSize: 0.72
+  name: Bache
+  takeAwayMoment: 0.5
+  impactVelocity: 1.4
+  canBeJumped: 1
+  growingVelocity: 0.6
+  maximumSize: 1.5
