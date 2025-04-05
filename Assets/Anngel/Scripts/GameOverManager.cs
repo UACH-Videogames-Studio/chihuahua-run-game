@@ -3,75 +3,96 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameOverManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class EnemyGameOverData
+    public class EnemyAnimationData
     {
-        public Texture enemySprite;
-        //A raw image is used as a container for each enemy's sprite.
-        //A raw image cannot be assigned a Sprite data type, but rather a Texture type.
-        public List<string> phrases;
+        public IEnumerator animationCoroutine;
     }
 
     [Header("UI References")]
     public GameObject gameOverPanel;
     public RawImage enemyImage; //Will be the container for the enemy's sprite.
-    public TMP_Text phraseText;
+    [SerializeField] private DialogueLevelStarter dialogueLevelStarter;
+    private DialogueCharacterSO character;
 
-    [Header("Enemies Data")]
-    public EnemyGameOverData planchadaData;
-    public EnemyGameOverData sinowiData;
-    public EnemyGameOverData pascualitaData;
+    [Header("Animation UI Settings")]
+    [SerializeField] private float duration = 0.75f;
+    [Range(0.1f, 10f)][SerializeField] private float animationSpeed = 1.0f;
 
-    private Dictionary<string, EnemyGameOverData> enemyDataMap;
+    [Header("Enemies Animations")]
+    public EnemyAnimationData planchadaAnimation;
+    public EnemyAnimationData sinowiAnimation;
+    public EnemyAnimationData pascualitaAnimation;
+
+    private Dictionary<string, EnemyAnimationData> enemyAnimationsMap;
 
     void Awake()
     {
+        // create new instances of EnemyAnimationData if they are null
+        planchadaAnimation ??= new EnemyAnimationData();
+        sinowiAnimation ??= new EnemyAnimationData();
+        pascualitaAnimation ??= new EnemyAnimationData();
+        // is equivalent to: 
+        // if (planchadaAnimation == null)
+        // {
+        //     planchadaAnimation = new EnemyAnimationData();
+        // }
+
+        // Initialize animation coroutines for each enemy animation data instance
+        planchadaAnimation.animationCoroutine = PlanchadaAnimation();
+        sinowiAnimation.animationCoroutine = SinowiAnimation();
+        pascualitaAnimation.animationCoroutine = PascualitaAnimation();
+
         // Initialize to data dictionary
-        // mapping scene names to enemy data
-        enemyDataMap = new Dictionary<string, EnemyGameOverData>()
+        // mapping scene names to enemy data animations
+        enemyAnimationsMap = new Dictionary<string, EnemyAnimationData>()
         {
-            {"Level1", planchadaData},
-            {"Level2", sinowiData},
-            {"Level3", pascualitaData}
+            {"Level1", planchadaAnimation},
+            {"Level2", sinowiAnimation},
+            {"Level3", pascualitaAnimation}
         };
 
         // The panel must be disabled at start
         if (gameOverPanel != null)
         {
-            //gameOverPanel.SetActive(false); //QUITAAR IMPORTANT!!!!
+            gameOverPanel.SetActive(false);
         }
     }
 
     public void ShowGameOver()
     {
+        if (dialogueLevelStarter == null)
+        {
+            Debug.LogWarning("DialogueLevelStarter is not assigned in the inspector.");
+            return;
+        }
+
         // Get the current scene name 
         string currentScene = SceneManager.GetActiveScene().name;
 
-        // Verify if enemyDataMap contain the current scene 
-        if (enemyDataMap.ContainsKey(currentScene))
+        if (enemyAnimationsMap.TryGetValue(currentScene, out EnemyAnimationData enemyData))
         {
-            EnemyGameOverData enemyData = enemyDataMap[currentScene];
-
-            // Configure the enemy image
-            if (enemyImage != null && enemyData.enemySprite != null)
+            if (enemyData == null || enemyData.animationCoroutine == null)
             {
-                enemyImage.texture = enemyData.enemySprite;
-                PlanchadaAnimation();
+                Debug.LogError($"Datos de animación no configurados para {currentScene}");
+                return;
             }
 
-            // Select a random phrase to enemies data and assign it to the phrase text
-            if (phraseText != null && enemyData.phrases != null && enemyData.phrases.Count > 0)
+            character = dialogueLevelStarter.SelectCharacter();
+
+            if (character != null && enemyImage != null)
             {
-                int randomIndex = Random.Range(0, enemyData.phrases.Count);
-                phraseText.text = enemyData.phrases[randomIndex];
+                enemyImage.texture = character.charcaterSprite;
             }
+
+            StartCoroutine(enemyData.animationCoroutine);
         }
         else
         {
-            Debug.LogWarning($"No hay frases o imágenes configuradas para los enemigos: {currentScene}");
+            Debug.LogWarning($"No hay animación configurada para la escena: {currentScene}");
         }
 
         if (gameOverPanel != null)
@@ -80,13 +101,76 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    public void PlanchadaAnimation()
+    public IEnumerator PlanchadaAnimation()
     {
-        enemyImage.uvRect = new Rect(0.5f, 0, 1, 1);
+        while (true)
+        {
+            float adjustedDuration = duration / animationSpeed;
+
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
+        }
+    }
+
+    public IEnumerator SinowiAnimation()
+    {
+        while (true)
+        {
+            float adjustedDuration = duration / animationSpeed;
+
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
+            yield return new WaitForSeconds(4.0f);
+            // yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            // yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
+            // yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
+        }
+    }
+
+    public IEnumerator PascualitaAnimation()
+    {
+        while (true)
+        {
+            float adjustedDuration = duration / animationSpeed;
+
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
+        }
+    }
+
+    private IEnumerator LerpUVRect(Rect start, Rect end, float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration); //Normalize time to [0, 1]
+            //if time is greater than duration, set t to 1
+            enemyImage.uvRect = new Rect(
+                Mathf.Lerp(start.x, end.x, t),
+                Mathf.Lerp(start.y, end.y, t),
+                Mathf.Lerp(start.width, end.width, t),
+                Mathf.Lerp(start.height, end.height, t)
+            );
+            yield return null;
+        }
+        enemyImage.uvRect = end;
     }
 
     public void RestartLevel()
     {
+        StopAllCoroutines();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -101,6 +185,7 @@ public class GameOverManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             ShowGameOver();
+            dialogueLevelStarter.CallDialogue();
         }
     }
 }
