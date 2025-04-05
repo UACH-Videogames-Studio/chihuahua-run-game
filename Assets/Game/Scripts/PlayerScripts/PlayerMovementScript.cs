@@ -12,7 +12,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField][Tooltip("The time that the player is inmortal")] private float invulnerabilityTime;
     [SerializeField][Tooltip("The blinks duration time")] private float blinkDuration = 0.2f;
     [HideInInspector] public bool isJumping;
-    private bool isInvencible, isACourutineStarted;
+    private bool isInvencible, isACourutineStarted, isActivateTheJumpCourutine;
     private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
     private PolygonCollider2D playerCollider;
     private Animator playerAnimator;
@@ -75,12 +75,18 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if(!isJumping)
         {
+            if(!isActivateTheJumpCourutine)
+            {
+                StartCoroutine(JumpCourutine());
+            }
             isJumping = true;
             airTimeCounter = 0f;
+            playerAnimator.SetTrigger("Jump");
         }
     }
     private void Land()
     {
+        playerAnimator.SetTrigger("Jump");
         isJumping = false;
     }
     private void Vulnerable()
@@ -110,5 +116,35 @@ public class PlayerMovementScript : MonoBehaviour
         }
         playerSpriteRenderer.enabled = true;
         isACourutineStarted = false;
+    }
+    private IEnumerator JumpCourutine()
+    {
+        isActivateTheJumpCourutine = true;
+        float startY = transform.position.y;
+        float endY = startY + 1f;
+        float halfDuration = timeCanJump * 0.5f;
+        float timer = 0f;
+        while (timer < halfDuration)
+        {
+            float t = timer / halfDuration;
+            float currentY = Mathf.Lerp(startY, endY, t);
+            Vector3 pos = transform.position;
+            transform.position = new Vector3(pos.x, currentY, pos.z);
+            timer += Time.deltaTime * GameManager.Instance.timeMultiplier;
+            yield return null;
+        }
+        timer = 0f;
+        while (timer < halfDuration)
+        {
+            float t = timer / halfDuration;
+            float currentY = Mathf.Lerp(endY, startY, t);
+            Vector3 pos = transform.position;
+            transform.position = new Vector3(pos.x, currentY, pos.z);
+            timer += Time.deltaTime * GameManager.Instance.timeMultiplier;
+            yield return null;
+        }
+        Vector3 finalPos = transform.position;
+        transform.position = new Vector3(finalPos.x, startY, finalPos.z);
+        isActivateTheJumpCourutine = false;
     }
 }
