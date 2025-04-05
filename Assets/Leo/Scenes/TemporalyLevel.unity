@@ -551,6 +551,7 @@ MonoBehaviour:
   pausePannel: {fileID: 135841433}
   gamePannel: {fileID: 135841432}
   playerScript: {fileID: 2097955088}
+  timeMultiplier: 0
 --- !u!1 &1831013044
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2431444079432047171, guid: 50e6a675408418849bbebf89bc5abd97, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f4881b0e6332bf49b52561a8d79c5c9, type: 3}
     - target: {fileID: 2431444079432047171, guid: 50e6a675408418849bbebf89bc5abd97, type: 3}
       propertyPath: m_SortingOrder
       value: 5

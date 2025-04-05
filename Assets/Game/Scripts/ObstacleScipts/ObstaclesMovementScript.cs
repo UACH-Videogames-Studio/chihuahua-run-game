@@ -35,7 +35,7 @@ public class ObstaclesMovementScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -47,6 +47,7 @@ public class ObstaclesMovementScript : MonoBehaviour
                 }
                 PlayerMovementScript.Instance.HasBeenHitten();
                 GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
+                Destroy(this.gameObject);
             }
         }
     }
