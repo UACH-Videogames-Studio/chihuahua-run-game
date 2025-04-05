@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
     [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
     [HideInInspector] public float timeMultiplier;
+    [HideInInspector] public bool isPlay;
     private void Awake()
     {   
         pausePannel.SetActive(false);
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         timeMultiplier = 1;
+        isPlay = true;
     }
     public void ChangeToBaseActions()
     {
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
         pausePannel.SetActive(true);
         //SetInputMap("UI");
         ChangeToUIActions();
+        isPlay = false;
         Debug.Log("The game was paused");
     }
     private void ResumeGame(InputAction.CallbackContext callbackContext)
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
         gamePannel.SetActive(true);
         //SetInputMap("Base");
         ChangeToBaseActions();
+        isPlay = true;
         Debug.Log("The game was continued");
     }
     public void ApplySlowDown()
