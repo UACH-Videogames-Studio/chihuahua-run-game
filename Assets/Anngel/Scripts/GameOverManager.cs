@@ -41,7 +41,7 @@ public class GameOverManager : MonoBehaviour
         // The panel must be disabled at start
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(false);
+            //gameOverPanel.SetActive(false); //QUITAAR IMPORTANT!!!!
         }
     }
 

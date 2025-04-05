@@ -4,9 +4,12 @@ using UnityEngine;
 public class DialogueCharacterSO : ScriptableObject
 {
     [Header("Character Info")]
-    [SerializeField] private string characterName;
-    [SerializeField] private Sprite profilePhoto;
+    [SerializeField] public string characterName;
+    //[SerializeField] private Sprite profilePhoto;
+    [SerializeField] public DialogueRoundSO[] dialogues;
+    [SerializeField] public Texture charcaterSprite;
+
 
     public string Name => characterName;
-    public Sprite ProfilePhoto => profilePhoto;
+    //public Sprite ProfilePhoto => profilePhoto;
 }

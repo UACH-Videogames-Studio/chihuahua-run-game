@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac5c2b0145fa14faf838bf99d53bda, type: 3}
+  m_Name: Planchada
+  m_EditorClassIdentifier: 
+  characterName: planchada
+  dialogues:
+  - {fileID: 11400000, guid: 0a682540e64b4784eb33fc49d7068c5a, type: 2}
+  - {fileID: 11400000, guid: 10231d657b712f44ab68b0e0c23fae50, type: 2}
+  - {fileID: 11400000, guid: 1cc3e0d5f13152c4495d112517cab39a, type: 2}
+  - {fileID: 11400000, guid: 910f8ae44fec90d428d9bc9d80b0faac, type: 2}
+  - {fileID: 11400000, guid: d4ede64e9a9112144841366a8cac95be, type: 2}
+  - {fileID: 11400000, guid: 286cc67c624117e48b226bb4e5d2b9f8, type: 2}
+  - {fileID: 11400000, guid: 36a847d486457b747875420cb92ca92e, type: 2}
