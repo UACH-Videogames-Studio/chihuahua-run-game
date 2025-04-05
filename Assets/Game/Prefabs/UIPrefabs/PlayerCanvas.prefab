@@ -217,6 +217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4398626259921039561}
     m_Modifications:
+    - target: {fileID: 465522019239266289, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 3171132271663301104, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
       propertyPath: m_Name
       value: GamePannel
@@ -224,6 +228,10 @@ PrefabInstance:
     - target: {fileID: 3171132271663301104, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4278072126432850984, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 48.697758
       objectReference: {fileID: 0}
     - target: {fileID: 4945337233180959293, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
       propertyPath: chacaritoFace
