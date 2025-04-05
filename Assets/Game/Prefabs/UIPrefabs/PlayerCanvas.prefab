@@ -229,6 +229,10 @@ PrefabInstance:
       propertyPath: chacaritoFace
       value: 
       objectReference: {fileID: 456930749237341668}
+    - target: {fileID: 4945337233180959293, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
+      propertyPath: timeToWaitOfTheDeathBar
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5234919695135487134, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
       propertyPath: m_Color.a
       value: 1
