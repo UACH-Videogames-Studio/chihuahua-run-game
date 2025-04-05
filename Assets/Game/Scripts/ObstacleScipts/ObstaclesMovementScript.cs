@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class ObstaclesMovementScript : MonoBehaviour
 {
@@ -49,6 +50,15 @@ public class ObstaclesMovementScript : MonoBehaviour
                 GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
                 Destroy(this.gameObject);
             }
+            else if (PlayerMovementScript.Instance.isJumping && this.obstacleScriptableObject.CanBeJumped)
+            {
+                StartCoroutine(DestroyCourutine());
+            }
         }
+    }
+    private IEnumerator DestroyCourutine()
+    {
+        yield return new WaitForSeconds(0.7f * GameManager.Instance.timeMultiplier);
+        Destroy(this.gameObject);
     }
 }
