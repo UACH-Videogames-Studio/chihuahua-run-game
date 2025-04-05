@@ -6,6 +6,7 @@ public class GameUIScript : MonoBehaviour
     [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The progress level bar in editor")] private Image progressLevelBar;
     [SerializeField][Tooltip("The death level bar in editor")] private Image progressDeathBar;
+    [SerializeField][Tooltip("The Chacarito Face")] private Image chacaritoFace;
     [SerializeField][Tooltip("The total time of the level")] private float totalTimeLevel;
     [SerializeField][Tooltip("Maximum booster of the bar")] private float maximumbooster;
     [SerializeField][Tooltip("The time to wait of the death bar")] private float timeToWaitOfTheDeathBar;
@@ -57,6 +58,19 @@ public class GameUIScript : MonoBehaviour
         }
         counter += Time.fixedDeltaTime * GameManager.Instance.timeMultiplier * currentbooster;
         progressLevelBar.fillAmount = counter / totalTimeLevel;
+        //
+        // Obtener el tamaño de la barra de progreso
+        RectTransform barRect = progressLevelBar.GetComponent<RectTransform>();
+        float barWidth = barRect.rect.width;
+
+        // Calcular la posición X de Chacarito en base al fillAmount
+        float filledX = (progressLevelBar.fillAmount * barWidth) - (barWidth * 0.5f);
+
+        // Actualizar la posición local del RectTransform de la cara
+        Vector3 chacaritoPos = chacaritoFace.rectTransform.localPosition;
+        chacaritoPos.x = -filledX;
+        chacaritoFace.rectTransform.localPosition = chacaritoPos;
+        //
         if (deathBarStart)
         {
             progressDeathBar.fillAmount = Mathf.Lerp(progressDeathBar.fillAmount, currentcounter / totalTimeLevel, Time.fixedDeltaTime * GameManager.Instance.timeMultiplier * deathSpeed);
