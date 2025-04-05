@@ -77,7 +77,7 @@ public class DialogueManager : MonoBehaviour
             yield return null;
         }
         
-        dialogueUI.HideDialogueBox();
+        //dialogueUI.HideDialogueBox();
         IsDialogueInProgress = false;
 
         if (!string.IsNullOrEmpty(currentTutorialKey))

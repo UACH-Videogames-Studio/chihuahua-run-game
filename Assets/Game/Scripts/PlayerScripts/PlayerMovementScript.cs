@@ -5,15 +5,14 @@ public class PlayerMovementScript : MonoBehaviour
 {
     public static PlayerMovementScript Instance { get; private set; }
     [HideInInspector] public PenguinInputActions inputActions;
-    [Header("Variables to assign")]
-    [Space(10)]
+    [Header("Variables to assign")][Space(10)]
     [SerializeField][Tooltip("The default value is 8")] private float limitXAndY;
     [SerializeField][Tooltip("The default velocity is 12")] private float velocity;
     [SerializeField][Tooltip("The time that the player can jump")] private float timeCanJump;
     [SerializeField][Tooltip("The time that the player is inmortal")] private float invulnerabilityTime;
     [SerializeField][Tooltip("The blinks duration time")] private float blinkDuration = 0.2f;
     [HideInInspector] public bool isJumping;
-    private bool isInvencible, isACourutineStarted;
+    private bool isInvencible, isACourutineStarted, isActivateTheJumpCourutine;
     private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
     private PolygonCollider2D playerCollider;
     private Animator playerAnimator;
@@ -51,18 +50,9 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        inputMovement = inputActions.Base.Movement.ReadValue<float>();
-
-        newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.deltaTime), -limitXAndY, limitXAndY);
-        //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
-
-        transform.position = new Vector2(newX, transform.position.y);
-    }
-    private void Update()
-    {
         if (isInvencible)
         {
-            invencibleTimeCounter += Time.deltaTime;
+            invencibleTimeCounter += Time.fixedDeltaTime * GameManager.Instance.timeMultiplier;
             if (invencibleTimeCounter >= invulnerabilityTime)
             {
                 Vulnerable();
@@ -70,32 +60,44 @@ public class PlayerMovementScript : MonoBehaviour
         }
         if (isJumping)
         {
-            airTimeCounter += Time.deltaTime;
+            airTimeCounter += Time.fixedDeltaTime * GameManager.Instance.timeMultiplier;
             if (airTimeCounter >= timeCanJump)
             {
                 Land();
             }
         }
+        inputMovement = inputActions.Base.Movement.ReadValue<float>();
+        newX = Mathf.Clamp(transform.position.x + (velocity * inputMovement * Time.fixedDeltaTime * GameManager.Instance.timeMultiplier), -limitXAndY, limitXAndY);
+        //The Mathf.Clamp(x, a, b) function limits a value x, in limits a, b
+        transform.position = new Vector2(newX, transform.position.y);
     }
     private void Jump(InputAction.CallbackContext context)
     {
         if(!isJumping)
         {
+            if(!isActivateTheJumpCourutine)
+            {
+                StartCoroutine(JumpCourutine());
+            }
             isJumping = true;
             airTimeCounter = 0f;
+            playerAnimator.SetTrigger("Jump");
         }
     }
     private void Land()
     {
+        playerAnimator.SetTrigger("Jump");
         isJumping = false;
     }
     private void Vulnerable()
     {
         playerCollider.enabled = true;
         isInvencible = false;
+        GameManager.Instance.ApplyFastUp();
     }
     public void HasBeenHitten()
     {
+        GameManager.Instance.ApplySlowDown();
         invencibleTimeCounter = 0f;
         playerCollider.enabled = false;
         isInvencible = true;
@@ -110,9 +112,39 @@ public class PlayerMovementScript : MonoBehaviour
         while (isInvencible)
         {
             playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled;
-            yield return new WaitForSeconds(blinkDuration);
+            yield return new WaitForSecondsRealtime(blinkDuration);
         }
         playerSpriteRenderer.enabled = true;
         isACourutineStarted = false;
+    }
+    private IEnumerator JumpCourutine()
+    {
+        isActivateTheJumpCourutine = true;
+        float startY = transform.position.y;
+        float endY = startY + 1f;
+        float halfDuration = timeCanJump * 0.5f;
+        float timer = 0f;
+        while (timer < halfDuration)
+        {
+            float t = timer / halfDuration;
+            float currentY = Mathf.Lerp(startY, endY, t);
+            Vector3 pos = transform.position;
+            transform.position = new Vector3(pos.x, currentY, pos.z);
+            timer += Time.deltaTime * GameManager.Instance.timeMultiplier;
+            yield return null;
+        }
+        timer = 0f;
+        while (timer < halfDuration)
+        {
+            float t = timer / halfDuration;
+            float currentY = Mathf.Lerp(endY, startY, t);
+            Vector3 pos = transform.position;
+            transform.position = new Vector3(pos.x, currentY, pos.z);
+            timer += Time.deltaTime * GameManager.Instance.timeMultiplier;
+            yield return null;
+        }
+        Vector3 finalPos = transform.position;
+        transform.position = new Vector3(finalPos.x, startY, finalPos.z);
+        isActivateTheJumpCourutine = false;
     }
 }

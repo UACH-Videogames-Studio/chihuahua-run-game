@@ -25,7 +25,7 @@ public class DialogueUI : MonoBehaviour
         if (CharacterName == null)
         {
             CharacterName.text = character.name;
-            CharacterPhoto.sprite = character.ProfilePhoto;
+            //CharacterPhoto.sprite = character.ProfilePhoto;
         }
     }
 
