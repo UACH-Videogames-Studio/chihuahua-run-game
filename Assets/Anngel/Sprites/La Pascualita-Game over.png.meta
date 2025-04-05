@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 3997d7564a6f2524ea51aa7d84507ec9
+guid: 56fab5205ee69d4488816d978e2377c2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7269321924454802016
-    second: Sinowi-Game over(1)_0
-  - first:
-      213: 4925354523349591538
-    second: Sinowi-Game over(1)_1
-  - first:
-      213: 6748904720472635586
-    second: Sinowi-Game over(1)_2
+      213: 3072327771171373860
+    second: La Pascualita-Game over_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sinowi-Game over(1)_0
+      name: La Pascualita-Game over_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 623
-        width: 9
-        height: 14
+        x: 177
+        y: 47
+        width: 622
+        height: 1457
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,52 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 062661996c1d1e460800000000000000
-      internalID: 7269321924454802016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sinowi-Game over(1)_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 82
-        width: 954
-        height: 1353
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f5ad15e7df5a5440800000000000000
-      internalID: 4925354523349591538
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sinowi-Game over(1)_2
-      rect:
-        serializedVersion: 2
-        x: 977
-        y: 595
-        width: 47
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c87ab6061de8ad50800000000000000
-      internalID: 6748904720472635586
+      spriteID: 423cc3a74d913aa20800000000000000
+      internalID: 3072327771171373860
       vertices: []
       indices: 
       edges: []
@@ -214,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +173,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Sinowi-Game over(1)_0: 7269321924454802016
-      Sinowi-Game over(1)_1: 4925354523349591538
-      Sinowi-Game over(1)_2: 6748904720472635586
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

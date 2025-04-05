@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10d329c2eac474a4fb4d2e15e0f9a7f1, type: 2}
   - {fileID: 11400000, guid: 859c03d70cc8a854383af2f53865666d, type: 2}
   - {fileID: 11400000, guid: f95aad795161a9248a6d6e220eaf323d, type: 2}
+  charcaterSprite: {fileID: 2800000, guid: 56fab5205ee69d4488816d978e2377c2, type: 3}
