@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class UIPauseScript : MonoBehaviour
 {
-    [SerializeField] private string newScene;
+    [SerializeField] private SceneTransitionManager sceneTransitionManager;
     public void Resume()
     {
         GameManager.Instance.TryResumeGame();
@@ -11,6 +11,6 @@ public class UIPauseScript : MonoBehaviour
     public void ChangeScene()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(newScene);
+        sceneTransitionManager.LoadNextScene();
     }
 }

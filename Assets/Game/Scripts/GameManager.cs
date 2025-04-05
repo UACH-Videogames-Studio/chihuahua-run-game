@@ -9,10 +9,18 @@ public class GameManager : MonoBehaviour
     [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
     [HideInInspector] public float timeMultiplier;
     [HideInInspector] public bool isPlay;
+    [SerializeField] private CanvasGroup gameCanvasGroup;
+    [SerializeField] private CanvasGroup pauseCanvasGroup;
     private void Awake()
     {   
-        pausePannel.SetActive(false);
-        gamePannel.SetActive(true);
+        //pausePannel.SetActive(false);
+        pauseCanvasGroup.alpha = 0f;
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        gameCanvasGroup.alpha = 1f;
+        gameCanvasGroup.interactable = true;
+        gameCanvasGroup.blocksRaycasts = true;
+        //gamePannel.SetActive(true);
         
         if (Instance == null)
         {
@@ -59,8 +67,15 @@ public class GameManager : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0;
-        gamePannel.SetActive(false);
-        pausePannel.SetActive(true);
+
+        //gamePannel.SetActive(false);
+        gameCanvasGroup.alpha = 0f;
+        gameCanvasGroup.interactable = false;
+        gameCanvasGroup.blocksRaycasts = false;
+        //pausePannel.SetActive(true);
+        pauseCanvasGroup.alpha = 1f;
+        pauseCanvasGroup.interactable = true;
+        pauseCanvasGroup.blocksRaycasts = true;
         //SetInputMap("UI");
         ChangeToUIActions();
         isPlay = false;
@@ -77,8 +92,14 @@ public class GameManager : MonoBehaviour
     private void ResumeGame()
     {
         Time.timeScale = 1;
-        pausePannel.SetActive(false);
-        gamePannel.SetActive(true);
+        //pausePannel.SetActive(false);
+        pauseCanvasGroup.alpha = 0f;
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        //gamePannel.SetActive(true);
+        gameCanvasGroup.alpha = 1f;
+        gameCanvasGroup.interactable = true;
+        gameCanvasGroup.blocksRaycasts = true;
         //SetInputMap("Base");
         ChangeToBaseActions();
         isPlay = true;
