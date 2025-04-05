@@ -451,6 +451,9 @@ MonoBehaviour:
   gameOverPanel: {fileID: 48509589}
   enemyImage: {fileID: 1756062764}
   phraseText: {fileID: 1757100176}
+  dialogueLevelStarter: {fileID: 0}
+  duration: 0.75
+  animationSpeed: 1
   planchadaData:
     enemySprite: {fileID: 2800000, guid: afab04aaef9ef6a4faea2d1375934220, type: 3}
     phrases:
@@ -462,7 +465,7 @@ MonoBehaviour:
     - "\"Solo quer\xEDa sentir el calor de un amigo... hace tanto fr\xEDo aqu\xED.\""
     - "\"En mi \xE9poca, los perros eran mis mejores compa\xF1eros en el hospital.\""
   sinowiData:
-    enemySprite: {fileID: 2800000, guid: afab04aaef9ef6a4faea2d1375934220, type: 3}
+    enemySprite: {fileID: 2800000, guid: 3997d7564a6f2524ea51aa7d84507ec9, type: 3}
     phrases:
     - "\"Mis fauces no distinguen entre ni\xF1os... y perros cobardes.\""
     - "\"El miedo huele dulce... y t\xFA apestas a \xE9l.\""
@@ -1044,7 +1047,7 @@ MonoBehaviour:
   m_Texture: {fileID: 2800000, guid: afab04aaef9ef6a4faea2d1375934220, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.6
     y: 0
     width: 1
     height: 1
@@ -1140,8 +1143,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1152,11 +1155,11 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 1
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 3
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1178,7 +1181,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -239.318, y: 0, z: -246.01236, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

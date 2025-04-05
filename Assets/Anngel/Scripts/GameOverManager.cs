@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class GameOverManager : MonoBehaviour
     public GameObject gameOverPanel;
     public RawImage enemyImage; //Will be the container for the enemy's sprite.
     public TMP_Text phraseText;
+    [SerializeField] private DialogueLevelStarter dialogueLevelStarter;
+    private DialogueCharacterSO character;
+
+    [Header("Animation UI Settings")]
+    [SerializeField] private float duration = 0.75f;
+    [Range(0.1f, 10f)][SerializeField] private float animationSpeed = 1.0f;
 
     [Header("Enemies Data")]
     public EnemyGameOverData planchadaData;
@@ -53,21 +60,20 @@ public class GameOverManager : MonoBehaviour
         // Verify if enemyDataMap contain the current scene 
         if (enemyDataMap.ContainsKey(currentScene))
         {
-            EnemyGameOverData enemyData = enemyDataMap[currentScene];
+            if (dialogueLevelStarter == null)
+            {
+                Debug.LogWarning("DialogueLevelStarter is not assigned in the inspector.");
+                return;
+            }
 
+            // character = dialogueLevelStarter.
             // Configure the enemy image
-            if (enemyImage != null && enemyData.enemySprite != null)
+            if (enemyImage != null)
             {
-                enemyImage.texture = enemyData.enemySprite;
-                PlanchadaAnimation();
+                //enemyImage.texture = enemyData.enemySprite;
+                StartCoroutine(PlanchadaAnimation());
             }
 
-            // Select a random phrase to enemies data and assign it to the phrase text
-            if (phraseText != null && enemyData.phrases != null && enemyData.phrases.Count > 0)
-            {
-                int randomIndex = Random.Range(0, enemyData.phrases.Count);
-                phraseText.text = enemyData.phrases[randomIndex];
-            }
         }
         else
         {
@@ -80,9 +86,39 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    public void PlanchadaAnimation()
+    public IEnumerator PlanchadaAnimation()
     {
-        enemyImage.uvRect = new Rect(0.5f, 0, 1, 1);
+        while (true)
+        {
+            float adjustedDuration = duration / animationSpeed;
+
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
+            yield return new WaitForSeconds(4.0f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
+        }
+    }
+
+    private IEnumerator LerpUVRect(Rect start, Rect end, float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration); //Normalize time to [0, 1]
+            //if time is greater than duration, set t to 1
+            enemyImage.uvRect = new Rect(
+                Mathf.Lerp(start.x, end.x, t),
+                Mathf.Lerp(start.y, end.y, t),
+                Mathf.Lerp(start.width, end.width, t),
+                Mathf.Lerp(start.height, end.height, t)
+            );
+            yield return null;
+        }
+        enemyImage.uvRect = end;
     }
 
     public void RestartLevel()
