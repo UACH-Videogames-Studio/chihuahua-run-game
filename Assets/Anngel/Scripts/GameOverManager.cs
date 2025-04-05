@@ -36,14 +36,14 @@ public class GameOverManager : MonoBehaviour
 
     void Awake()
     {
-        // Initialize to data dictionary
-        // mapping scene names to enemy data
-        enemyDataMap = new Dictionary<string, EnemyGameOverData>()
-        {
-            {"Level1", planchadaData},
-            {"Level2", sinowiData},
-            {"Level3", pascualitaData}
-        };
+        // // Initialize to data dictionary
+        // // mapping scene names to enemy data
+        // enemyDataMap = new Dictionary<string, EnemyGameOverData>()
+        // {
+        //     {"Level1", planchadaData},
+        //     {"Level2", sinowiData},
+        //     {"Level3", pascualitaData}
+        // };
 
         // The panel must be disabled at start
         if (gameOverPanel != null)
@@ -57,27 +57,19 @@ public class GameOverManager : MonoBehaviour
         // Get the current scene name 
         string currentScene = SceneManager.GetActiveScene().name;
 
-        // Verify if enemyDataMap contain the current scene 
-        if (enemyDataMap.ContainsKey(currentScene))
+        if (dialogueLevelStarter == null)
         {
-            if (dialogueLevelStarter == null)
-            {
-                Debug.LogWarning("DialogueLevelStarter is not assigned in the inspector.");
-                return;
-            }
-
-            // character = dialogueLevelStarter.
-            // Configure the enemy image
-            if (enemyImage != null)
-            {
-                //enemyImage.texture = enemyData.enemySprite;
-                StartCoroutine(PlanchadaAnimation());
-            }
-
+            Debug.LogWarning("DialogueLevelStarter is not assigned in the inspector.");
+            return;
         }
-        else
+
+        character = dialogueLevelStarter.SelectCharacter();
+        enemyImage.texture = character.charcaterSprite;
+        // Configure the enemy image
+        if (enemyImage != null)
         {
-            Debug.LogWarning($"No hay frases o imágenes configuradas para los enemigos: {currentScene}");
+            //enemyImage.texture = enemyData.enemySprite;
+            StartCoroutine(PlanchadaAnimation());
         }
 
         if (gameOverPanel != null)
@@ -137,6 +129,7 @@ public class GameOverManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             ShowGameOver();
+            dialogueLevelStarter.CallDialogue();
         }
     }
 }

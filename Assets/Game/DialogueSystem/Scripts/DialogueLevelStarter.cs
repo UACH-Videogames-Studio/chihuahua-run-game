@@ -54,10 +54,10 @@ public class DialogueLevelStarter : MonoBehaviour
         //    }
 
         //}
-        CallDialogue();
+        //CallDialogue();
     }
 
-    private DialogueCharacterSO SelectCharacter()
+    public DialogueCharacterSO SelectCharacter()
     {
         //if (characters.Length < 0)
         //{

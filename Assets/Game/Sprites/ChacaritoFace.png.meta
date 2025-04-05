@@ -212,7 +212,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ChacaritoFace_0: 2724721904719831738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
