@@ -117,16 +117,16 @@ public class GameOverManager : MonoBehaviour
         {
             float adjustedDuration = duration / animationSpeed;
 
-            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
-            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
-            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
-            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
-            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.5f);
-            yield return LerpUVRect(new Rect(0, 0, 1, -0.05f), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2.0f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2.0f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2.0f);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), 2.0f);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), 2.0f);
+            yield return new WaitForSecondsRealtime(2.0f);
+            yield return LerpUVRect(new Rect(0, 0, 1, -0.05f), new Rect(0, 0, 1, 1), 2.0f);
         }
     }
 
@@ -136,12 +136,12 @@ public class GameOverManager : MonoBehaviour
         {
             float adjustedDuration = duration / animationSpeed;
 
-            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
-            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
-            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSecondsRealtime(0.75f);
+            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), 2.0f);
+            yield return new WaitForSecondsRealtime(2f);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
         }
