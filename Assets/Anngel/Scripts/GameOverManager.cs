@@ -44,7 +44,7 @@ public class GameOverManager : MonoBehaviour
         // Initialize animation coroutines for each enemy animation data instance
         planchadaAnimation.animationCoroutine = PlanchadaAnimation();
         sinowiAnimation.animationCoroutine = SinowiAnimation();
-        pascualitaAnimation.animationCoroutine = PascualitaAnimation();
+        pascualitaAnimation.animationCoroutine = PlanchadaAnimation();
 
         // Initialize to data dictionary
         // mapping scene names to enemy data animations
@@ -108,12 +108,15 @@ public class GameOverManager : MonoBehaviour
             float adjustedDuration = duration / animationSpeed;
 
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(4.0f);
-            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(0.75f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(0.75f);
             yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(0.75f);
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
             yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
+            yield return new WaitForSeconds(0.5f);
+            yield return LerpUVRect(new Rect(0, 0, 1, -0.05f), new Rect(0, 0, 1, 1), adjustedDuration);
         }
     }
 
@@ -124,28 +127,13 @@ public class GameOverManager : MonoBehaviour
             float adjustedDuration = duration / animationSpeed;
 
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(4.0f);
-            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
-            yield return new WaitForSeconds(4.0f);
-            // yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(0.75f);
+            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(0.75f);
+            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
+            yield return new WaitForSeconds(0.75f);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
-        }
-    }
-
-    public IEnumerator PascualitaAnimation()
-    {
-        while (true)
-        {
-            float adjustedDuration = duration / animationSpeed;
-
-            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(4.0f);
-            yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), 5.5f);
-            yield return new WaitForSeconds(4.0f);
-            yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
-            yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
-            yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
         }
     }
 
