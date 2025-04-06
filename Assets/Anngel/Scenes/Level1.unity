@@ -374,7 +374,7 @@ MonoBehaviour:
   enemyImage: {fileID: 1756062764}
   dialogueLevelStarter: {fileID: 1814261881}
   duration: 0.75
-  animationSpeed: 1
+  animationSpeed: 0.7
 --- !u!1001 &590902059
 PrefabInstance:
   m_ObjectHideFlags: 0
