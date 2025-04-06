@@ -436,13 +436,13 @@ MonoBehaviour:
       - m_Target: {fileID: 755186573}
         m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
         m_MethodName: LoadNextScene
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenuScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &245230557
@@ -1254,7 +1254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 671969489709641075, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2733461662488321271, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: m_LocalScale.x
@@ -1310,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054758126516768041, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: nextSceneName
-      value: AnimTest
+      value: MainMenuScene
       objectReference: {fileID: 0}
     - target: {fileID: 6054758126516768041, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: transitionAnim
