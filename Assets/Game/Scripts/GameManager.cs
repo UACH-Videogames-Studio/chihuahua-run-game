@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set;} //This line is our public acces for all of codes
-    [Header("Tha variables to assign")][Space(10)]
+    public static GameManager Instance { get; private set; } //This line is our public acces for all of codes
+    [Header("Tha variables to assign")]
+    [Space(10)]
     [SerializeField][Tooltip("Here goes the pause pannel in PlayerCanvas")] private GameObject pausePannel;
     [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
     [SerializeField][Tooltip("Here goes the win pannel in PlayerCanvas")] private GameObject winPannel;
@@ -13,8 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup pauseCanvasGroup;
     [HideInInspector] public float timeMultiplier;
     [HideInInspector] public bool isPlay;
+    // [SerializeField] private GameOverManager gameOverManager;
     private void Awake()
-    {   
+    {
+        //gameOverManager ??= new GameOverManager();
         //pausePannel.SetActive(false);
         winPannel.SetActive(false);
         losePannel.SetActive(false);
@@ -25,7 +28,7 @@ public class GameManager : MonoBehaviour
         gameCanvasGroup.interactable = true;
         gameCanvasGroup.blocksRaycasts = true;
         //gamePannel.SetActive(true);
-        
+
         if (Instance == null)
         {
             Instance = this;
@@ -127,6 +130,8 @@ public class GameManager : MonoBehaviour
     }
     public void LoseGame()
     {
-        losePannel.SetActive(true);
+        // gameOverManager.GameOver();
+        GameOverManager.Instance.GameOver();
+        // losePannel.SetActive(true);
     }
 }

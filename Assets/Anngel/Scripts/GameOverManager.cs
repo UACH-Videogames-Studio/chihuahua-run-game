@@ -7,6 +7,7 @@ using System.Collections;
 
 public class GameOverManager : MonoBehaviour
 {
+    public static GameOverManager Instance { get; private set; }
     public class EnemyAnimationData
     {
         public IEnumerator animationCoroutine;
@@ -31,6 +32,15 @@ public class GameOverManager : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         // create new instances of EnemyAnimationData if they are null
         planchadaAnimation ??= new EnemyAnimationData();
         sinowiAnimation ??= new EnemyAnimationData();
@@ -108,14 +118,14 @@ public class GameOverManager : MonoBehaviour
             float adjustedDuration = duration / animationSpeed;
 
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
             yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
             yield return LerpUVRect(new Rect(0, 0, 1, -0.05f), new Rect(0, 0, 1, 1), adjustedDuration);
         }
     }
@@ -127,11 +137,11 @@ public class GameOverManager : MonoBehaviour
             float adjustedDuration = duration / animationSpeed;
 
             yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             yield return LerpUVRect(new Rect(0.6f, 0, 1, 1), new Rect(-0.6f, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             yield return LerpUVRect(new Rect(-0.6f, 0, 1, 1), new Rect(0, 0, 1, 1), adjustedDuration);
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1), new Rect(0, 0, 1, 1.5f), adjustedDuration);
             // yield return LerpUVRect(new Rect(0, 0, 1, 1.5f), new Rect(0, 0, 1, -0.05f), adjustedDuration);
         }
@@ -175,5 +185,11 @@ public class GameOverManager : MonoBehaviour
             ShowGameOver();
             dialogueLevelStarter.CallDialogue();
         }
+    }
+
+    public void GameOver()
+    {
+        ShowGameOver();
+        dialogueLevelStarter.CallDialogue();
     }
 }
