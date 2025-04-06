@@ -10,7 +10,7 @@ public class ObstaclesMovementScript : MonoBehaviour
     private void Start()
     {
         currentSize = 0;
-        obstacleAudioSource = GetComponent<AudioSource>();
+        this.obstacleAudioSource = this.gameObject.GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
@@ -42,13 +42,16 @@ public class ObstaclesMovementScript : MonoBehaviour
         {
             if (!this.obstacleScriptableObject.CanBeJumped || !PlayerMovementScript.Instance.isJumping)
             {
-                if(this.obstacleScriptableObject.ObstacleAudioHit != null)
-                {
-                    this.obstacleAudioSource.PlayOneShot(this.obstacleScriptableObject.ObstacleAudioHit);
-                }
+                // if(this.obstacleScriptableObject.ObstacleAudioHit != null)
+                // {
+                //     this.obstacleAudioSource.PlayOneShot(this.obstacleScriptableObject.ObstacleAudioHit);
+                // }
+                // PlayerMovementScript.Instance.HasBeenHitten();
+                // GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
+                // Destroy(this.gameObject);
                 PlayerMovementScript.Instance.HasBeenHitten();
-                GameUIScript.Instance.QuitMomentum(obstacleScriptableObject.TakeAwayMoment);
-                Destroy(this.gameObject);
+                GameUIScript.Instance.QuitMomentum(this.obstacleScriptableObject.TakeAwayMoment);
+                StartCoroutine(DestroyAfterSound());
             }
             else if (PlayerMovementScript.Instance.isJumping && this.obstacleScriptableObject.CanBeJumped)
             {
@@ -56,6 +59,12 @@ public class ObstaclesMovementScript : MonoBehaviour
             }
         }
     }
+    private IEnumerator DestroyAfterSound()
+{
+    this.obstacleAudioSource.PlayOneShot(this.obstacleScriptableObject.ObstacleAudioHit);
+    yield return new WaitForSeconds(this.obstacleScriptableObject.ObstacleAudioHit.length);
+    Destroy(this.gameObject);
+}
     private IEnumerator DestroyCourutine()
     {
         yield return new WaitForSeconds(0.7f * GameManager.Instance.timeMultiplier);

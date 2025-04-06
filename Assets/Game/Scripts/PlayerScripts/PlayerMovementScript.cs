@@ -12,11 +12,14 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField][Tooltip("The time that the player can jump")] private float timeCanJump;
     [SerializeField][Tooltip("The time that the player is inmortal")] private float invulnerabilityTime;
     [SerializeField][Tooltip("The blinks duration time")] private float blinkDuration = 0.2f;
+    [SerializeField] AudioClip jumpSound;
+    [SerializeField] AudioClip hitSound;
     [HideInInspector] public bool isJumping;
     private bool isInvencible, isACourutineStarted, isActivateTheJumpCourutine;
     private float inputMovement, newX, airTimeCounter = 0f, invencibleTimeCounter = 0f;
     private PolygonCollider2D playerCollider;
     private Animator playerAnimator;
+    private AudioSource playerAudioSource;
     [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void Start()
     {
+        playerAudioSource = GetComponent<AudioSource>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<PolygonCollider2D>();
         playerAnimator = GetComponent<Animator>();
@@ -101,6 +105,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if(!isJumping)
         {
+            playerAudioSource.PlayOneShot(jumpSound);
             if(!isActivateTheJumpCourutine)
             {
                 StartCoroutine(JumpCourutine());
@@ -123,6 +128,7 @@ public class PlayerMovementScript : MonoBehaviour
     }
     public void HasBeenHitten()
     {
+        playerAudioSource.PlayOneShot(hitSound);
         GameManager.Instance.ApplySlowDown();
         invencibleTimeCounter = 0f;
         playerCollider.enabled = false;

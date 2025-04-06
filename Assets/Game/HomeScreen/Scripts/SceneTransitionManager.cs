@@ -23,4 +23,12 @@ public class SceneTransitionManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneName);
     }
+    public void ChangePlayerActions()
+    {
+        GameManager.Instance.ChangeToBaseActions();
+    }
+    public void ChangeUIActions()
+    {
+        GameManager.Instance.ChangeToUIActions();
+    }
 }

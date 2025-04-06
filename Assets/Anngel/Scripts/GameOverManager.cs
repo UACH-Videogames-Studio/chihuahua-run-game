@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameOverManager : MonoBehaviour
     public GameObject gameOverPanel;
     public RawImage enemyImage; //Will be the container for the enemy's sprite.
     [SerializeField] private DialogueLevelStarter dialogueLevelStarter;
+    [SerializeField] private AudioClip enemyAudioClip;
+    private AudioSource audioSource;
     private DialogueCharacterSO character;
 
     [Header("Animation UI Settings")]
@@ -71,7 +74,10 @@ public class GameOverManager : MonoBehaviour
             gameOverPanel.SetActive(false);
         }
     }
-
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void ShowGameOver()
     {
         if (dialogueLevelStarter == null)
@@ -109,6 +115,7 @@ public class GameOverManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
         }
+        audioSource.PlayOneShot(enemyAudioClip);
     }
 
     public IEnumerator PlanchadaAnimation()

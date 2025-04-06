@@ -19,3 +19,4 @@ MonoBehaviour:
   isStatic: 1
   growingVelocity: 0.3
   maximumSize: 2
+  obstacleAudioHit: {fileID: 8300000, guid: 4e499faf7f9945e40a3b202a0f9a1521, type: 3}
