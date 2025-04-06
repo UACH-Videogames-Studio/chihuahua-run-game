@@ -12,6 +12,10 @@ public class SceneTransitionManager : MonoBehaviour
     {
         StartCoroutine(SceneLoad(nextSceneName));
     }
+    public void LoadNextScene(string sceneName)
+    {
+        StartCoroutine(SceneLoad(sceneName));
+    }
 
     public IEnumerator SceneLoad(string sceneName)
     {

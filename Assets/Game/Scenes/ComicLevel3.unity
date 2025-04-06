@@ -1434,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054758126516768041, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: nextSceneName
-      value: AnimTest
+      value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 6054758126516768041, guid: 61199761b5f601648b6c6e3e974cea71, type: 3}
       propertyPath: transitionAnim
