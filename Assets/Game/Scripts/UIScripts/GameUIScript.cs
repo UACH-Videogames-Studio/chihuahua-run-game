@@ -28,9 +28,11 @@ public class GameUIScript : MonoBehaviour
     }
     private void EndLevel()
     {
+        GameManager.Instance.WinGame();
     }
     private void LoseLevel()
     {
+        GameManager.Instance.LoseGame();
         Debug.Log("You've lost");
     }
     public void QuitMomentum(float momentum)
