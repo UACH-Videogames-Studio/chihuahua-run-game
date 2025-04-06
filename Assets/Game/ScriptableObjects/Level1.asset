@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a842c8e724c356649a3ea8c1524ddf5f, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  pausePannel: {fileID: 5050093754110874998, guid: 71a66a3a637e3034c8609bdfac88a53c, type: 3}
+  gamePannel: {fileID: 3171132271663301104, guid: 0e36a815f941c6b4c84de2013abe3d37, type: 3}
+  winPannel: {fileID: 8451615469908450563, guid: 48a9dc9a4a5625b48a11f485856d84e8, type: 3}
+  losePannel: {fileID: 5240222006865462323, guid: 29c83cd6832e5684fa7b1e9a3921fcd7, type: 3}
+  player: {fileID: 3768416160236704653, guid: 50e6a675408418849bbebf89bc5abd97, type: 3}

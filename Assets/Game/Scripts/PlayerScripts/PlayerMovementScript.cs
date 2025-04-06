@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerMovementScript : MonoBehaviour
 {
     public static PlayerMovementScript Instance { get; private set; }
@@ -19,16 +20,30 @@ public class PlayerMovementScript : MonoBehaviour
     [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
+            
+            SafeCleanup();
             Destroy(gameObject);
+            return;
         }
+    
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    
+        
         inputActions = new PenguinInputActions();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<PolygonCollider2D>();
+        playerAnimator = GetComponent<Animator>();
+    }
+    private void SafeCleanup()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+            inputActions.Dispose();
+        }
     }
     private void Start()
     {
@@ -40,13 +55,24 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         inputActions.Base.Jump.started += Jump;
         inputActions.Enable();
     }
     private void OnDisable()
     {
-        inputActions.Base.Jump.started -= Jump;
-        inputActions.Disable();
+        if (Instance != this) return;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (inputActions!=null)
+        {
+           inputActions.Base.Jump.started -= Jump;
+            inputActions.Disable(); 
+        }
+        
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        inputActions.Enable();
     }
     private void FixedUpdate()
     {
