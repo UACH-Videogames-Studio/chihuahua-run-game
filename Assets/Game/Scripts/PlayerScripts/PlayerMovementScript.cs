@@ -22,14 +22,28 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            
+            SafeCleanup();
             Destroy(gameObject);
-        } 
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            return;
         }
+    
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    
+        
         inputActions = new PenguinInputActions();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<PolygonCollider2D>();
+        playerAnimator = GetComponent<Animator>();
+    }
+    private void SafeCleanup()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+            inputActions.Dispose();
+        }
     }
     private void Start()
     {
@@ -47,9 +61,14 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (Instance != this) return;
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        inputActions.Base.Jump.started -= Jump;
-        inputActions.Disable();
+        if (inputActions!=null)
+        {
+           inputActions.Base.Jump.started -= Jump;
+            inputActions.Disable(); 
+        }
+        
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

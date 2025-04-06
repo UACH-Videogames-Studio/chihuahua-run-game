@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField][Tooltip("Lose panel in PlayerCanvas")] private GameObject losePannel;
     [SerializeField][Tooltip("Game canvas group")] private CanvasGroup gameCanvasGroup;
     [SerializeField][Tooltip("Pause canvas group")] private CanvasGroup pauseCanvasGroup;
+    [SerializeField] private PannelsScriptableObjects scriptableObjects;
     [HideInInspector] public float timeMultiplier;
     [HideInInspector] public bool isPlay;
     [SerializeField] private PlayerMovementScript playerScript;
@@ -25,6 +26,43 @@ public class GameManager : MonoBehaviour
             }
             return playerScript;
         }
+    }
+    public void SetPanels()
+    {
+        //pausePannel = pannelsScriptableObjects.PausePannel;
+        //gamePannel = pannelsScriptableObjects.GamePannel;
+        //winPannel = pannelsScriptableObjects.WinPannel;
+        //losePannel = pannelsScriptableObjects.LosePannel;
+        GameObject.Find("PausePannel");
+        GameObject.Find("GamePannel");
+        GameObject.Find("WinPannel");
+        GameObject.Find("LosePannel");
+        gameCanvasGroup = gamePannel.GetComponent<CanvasGroup>();
+        pauseCanvasGroup = pausePannel.GetComponent<CanvasGroup>();
+        timeMultiplier = 1;
+        isPlay = true;
+        winPannel.SetActive(false);
+        losePannel.SetActive(false);
+        pauseCanvasGroup.alpha = 0f;
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        gameCanvasGroup.alpha = 1f;
+        gameCanvasGroup.interactable = true;
+        gameCanvasGroup.blocksRaycasts = true;
+    }
+
+   
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Time.timeScale = 1f; 
+        SetPanels();
+        pauseCanvasGroup.alpha = 0f;
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        gameCanvasGroup.alpha = 1f;
+        gameCanvasGroup.interactable = true;
+        gameCanvasGroup.blocksRaycasts = true;
+        isPlay = true;
     }
     private void Awake()
     {
@@ -51,18 +89,43 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => PlayerMovementScript.Instance != null);
+        yield return new WaitUntil(() => 
+        PlayerMovementScript.Instance != null && 
+        PlayerMovementScript.Instance.inputActions != null);
+    
         playerScript = PlayerMovementScript.Instance;
-        PlayerScript.inputActions.Base.Pause.started += PauseGame;
-        PlayerScript.inputActions.UI.Resume.started += ResumeGame;
-        PlayerScript.inputActions.Enable();
+    
+        
+        if(playerScript.inputActions != null)
+        {
+            playerScript.inputActions.Base.Pause.started += PauseGame;
+            playerScript.inputActions.UI.Resume.started += ResumeGame;
+            playerScript.inputActions.Enable();
+        }
+    }
+    private void OnEnable()
+    {
+        var allTransforms = Resources.FindObjectsOfTypeAll<Transform>();
+        foreach (var t in allTransforms)
+        {
+            if (t.name == "PausePanel" && t.gameObject.scene.name == SceneManager.GetActiveScene().name)
+            {
+                // t es el transform del panel inactivo en la escena actual
+            }
+        }
     }
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance != this) return;
         if (PlayerMovementScript.Instance == null) return;
-        PlayerScript.inputActions.Base.Pause.started -= PauseGame;
-        PlayerScript.inputActions.UI.Resume.started -= ResumeGame;
-        PlayerScript.inputActions.Disable();
+        if (PlayerScript.inputActions != null)
+        {
+           PlayerScript.inputActions.Base.Pause.started -= PauseGame;
+            PlayerScript.inputActions.UI.Resume.started -= ResumeGame;
+            PlayerScript.inputActions.Disable(); 
+        }
+        
     }
     public void ChangeToBaseActions()
     {
