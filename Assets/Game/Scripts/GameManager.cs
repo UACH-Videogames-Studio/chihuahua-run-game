@@ -6,14 +6,18 @@ public class GameManager : MonoBehaviour
     [Header("Tha variables to assign")][Space(10)]
     [SerializeField][Tooltip("Here goes the pause pannel in PlayerCanvas")] private GameObject pausePannel;
     [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
+    [SerializeField][Tooltip("Here goes the win pannel in PlayerCanvas")] private GameObject winPannel;
+    [SerializeField][Tooltip("Here goes the lose pannel in PlayerCanvas")] private GameObject losePannel;
     [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
-    [HideInInspector] public float timeMultiplier;
-    [HideInInspector] public bool isPlay;
     [SerializeField] private CanvasGroup gameCanvasGroup;
     [SerializeField] private CanvasGroup pauseCanvasGroup;
+    [HideInInspector] public float timeMultiplier;
+    [HideInInspector] public bool isPlay;
     private void Awake()
     {   
         //pausePannel.SetActive(false);
+        winPannel.SetActive(false);
+        losePannel.SetActive(false);
         pauseCanvasGroup.alpha = 0f;
         pauseCanvasGroup.interactable = false;
         pauseCanvasGroup.blocksRaycasts = false;
@@ -116,5 +120,13 @@ public class GameManager : MonoBehaviour
         timeMultiplier = 1;
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
+    }
+    public void WinGame()
+    {
+        winPannel.SetActive(true);
+    }
+    public void LoseGame()
+    {
+        losePannel.SetActive(true);
     }
 }
