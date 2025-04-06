@@ -29,6 +29,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Martin/Scenes/ComicScene.unity
     guid: c421b19cfaa3ea04ea3af952cbde779f
+  - enabled: 1
+    path: Assets/Game/Scenes/ComicLevel1.unity
+    guid: b83b1917309074a49b7cabbf92542fa1
+  - enabled: 1
+    path: Assets/Game/Scenes/Level2.unity
+    guid: be1b8e2dd3fc9bc4e8a735fed94bbbca
+  - enabled: 1
+    path: Assets/Game/Scenes/ComicLevel2.unity
+    guid: 77e7851b799e3f24ba5d8431171abbcb
+  - enabled: 1
+    path: Assets/Game/Scenes/ComicLevel3.unity
+    guid: 7750c1ad7bf37a7498e507d1d9b9c838
+  - enabled: 1
+    path: Assets/Game/Scenes/ComicLevelFinal.unity
+    guid: b234559f10ff38f41a4731e382cbb009
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
