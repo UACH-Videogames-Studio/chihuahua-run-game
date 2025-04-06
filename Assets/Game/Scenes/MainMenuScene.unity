@@ -223,7 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5fac06fda8990419c012826b493f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 1086295672}
+  titleText:
+  - {fileID: 1818281300}
+  - {fileID: 1403078096}
   mainMenuCanvasGroup: {fileID: 1163154392}
   sceneTransitionManager: {fileID: 1275368841835175719}
   optionsCanvasGroup: {fileID: 203215481}
