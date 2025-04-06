@@ -19,14 +19,14 @@ public class PlayerMovementScript : MonoBehaviour
     [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            DontDestroyOnLoad(gameObject);
-        } 
-        else 
+        if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
         inputActions = new PenguinInputActions();
     }
