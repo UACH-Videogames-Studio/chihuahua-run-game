@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerMovementScript : MonoBehaviour
 {
     public static PlayerMovementScript Instance { get; private set; }
@@ -19,14 +20,14 @@ public class PlayerMovementScript : MonoBehaviour
     [HideInInspector] public SpriteRenderer playerSpriteRenderer;
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        } 
+        else
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
         inputActions = new PenguinInputActions();
     }
@@ -40,13 +41,19 @@ public class PlayerMovementScript : MonoBehaviour
     }
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         inputActions.Base.Jump.started += Jump;
         inputActions.Enable();
     }
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         inputActions.Base.Jump.started -= Jump;
         inputActions.Disable();
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        inputActions.Enable();
     }
     private void FixedUpdate()
     {

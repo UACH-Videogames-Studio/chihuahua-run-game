@@ -1,34 +1,33 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } //This line is our public acces for all of codes
-    [Header("Tha variables to assign")]
-    [Space(10)]
-    [SerializeField][Tooltip("Here goes the pause pannel in PlayerCanvas")] private GameObject pausePannel;
-    [SerializeField][Tooltip("Here goes the game pannel in PlayerCanvas")] private GameObject gamePannel;
-    [SerializeField][Tooltip("Here goes the win pannel in PlayerCanvas")] private GameObject winPannel;
-    [SerializeField][Tooltip("Here goes the lose pannel in PlayerCanvas")] private GameObject losePannel;
-    [SerializeField][Tooltip("Here goes the player")] private PlayerMovementScript playerScript;
-    [SerializeField] private CanvasGroup gameCanvasGroup;
-    [SerializeField] private CanvasGroup pauseCanvasGroup;
+    public static GameManager Instance { get; private set; }
+    [Header("The variables to assign")][Space(10)]
+    [SerializeField][Tooltip("Pause panel in PlayerCanvas")] private GameObject pausePannel;
+    [SerializeField][Tooltip("Game panel in PlayerCanvas")] private GameObject gamePannel;
+    [SerializeField][Tooltip("Win panel in PlayerCanvas")] private GameObject winPannel;
+    [SerializeField][Tooltip("Lose panel in PlayerCanvas")] private GameObject losePannel;
+    [SerializeField][Tooltip("Game canvas group")] private CanvasGroup gameCanvasGroup;
+    [SerializeField][Tooltip("Pause canvas group")] private CanvasGroup pauseCanvasGroup;
     [HideInInspector] public float timeMultiplier;
     [HideInInspector] public bool isPlay;
-    // [SerializeField] private GameOverManager gameOverManager;
+    [SerializeField] private PlayerMovementScript playerScript;
+    public PlayerMovementScript PlayerScript
+    {
+        get
+        {
+            if (playerScript == null)
+            {
+                playerScript = PlayerMovementScript.Instance;
+            }
+            return playerScript;
+        }
+    }
     private void Awake()
     {
-        //gameOverManager ??= new GameOverManager();
-        //pausePannel.SetActive(false);
-        winPannel.SetActive(false);
-        losePannel.SetActive(false);
-        pauseCanvasGroup.alpha = 0f;
-        pauseCanvasGroup.interactable = false;
-        pauseCanvasGroup.blocksRaycasts = false;
-        gameCanvasGroup.alpha = 1f;
-        gameCanvasGroup.interactable = true;
-        gameCanvasGroup.blocksRaycasts = true;
-        //gamePannel.SetActive(true);
-
         if (Instance == null)
         {
             Instance = this;
@@ -37,33 +36,45 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
         timeMultiplier = 1;
         isPlay = true;
+        winPannel.SetActive(false);
+        losePannel.SetActive(false);
+        pauseCanvasGroup.alpha = 0f;
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        gameCanvasGroup.alpha = 1f;
+        gameCanvasGroup.interactable = true;
+        gameCanvasGroup.blocksRaycasts = true;
     }
-    public void ChangeToBaseActions()
+    private IEnumerator Start()
     {
-        playerScript.inputActions.Disable();
-        playerScript.inputActions.Base.Enable();
-    }
-    public void ChangeToUIActions()
-    {
-        playerScript.inputActions.Disable();
-        playerScript.inputActions.UI.Enable();
-    }
-    private void OnEnable()
-    {
-        playerScript.inputActions.Base.Pause.started += PauseGame;
-        playerScript.inputActions.UI.Resume.started += ResumeGame;
-        playerScript.inputActions.Enable();
+        yield return new WaitUntil(() => PlayerMovementScript.Instance != null);
+        playerScript = PlayerMovementScript.Instance;
+        PlayerScript.inputActions.Base.Pause.started += PauseGame;
+        PlayerScript.inputActions.UI.Resume.started += ResumeGame;
+        PlayerScript.inputActions.Enable();
     }
     private void OnDisable()
     {
-        playerScript.inputActions.Base.Pause.started -= PauseGame;
-        playerScript.inputActions.UI.Resume.started -= ResumeGame;
-        playerScript.inputActions.Disable();
+        if (PlayerMovementScript.Instance == null) return;
+        PlayerScript.inputActions.Base.Pause.started -= PauseGame;
+        PlayerScript.inputActions.UI.Resume.started -= ResumeGame;
+        PlayerScript.inputActions.Disable();
     }
-    private void PauseGame(InputAction.CallbackContext callbackContext)
+    public void ChangeToBaseActions()
+    {
+        PlayerScript.inputActions.Disable();
+        PlayerScript.inputActions.Base.Enable();
+    }
+    public void ChangeToUIActions()
+    {
+        PlayerScript.inputActions.Disable();
+        PlayerScript.inputActions.UI.Enable();
+    }
+    private void PauseGame(InputAction.CallbackContext context)
     {
         PauseGame();
     }
@@ -75,20 +86,19 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        //gamePannel.SetActive(false);
-        gameCanvasGroup.alpha = 0f;
-        gameCanvasGroup.interactable = false;
-        gameCanvasGroup.blocksRaycasts = false;
-        //pausePannel.SetActive(true);
         pauseCanvasGroup.alpha = 1f;
         pauseCanvasGroup.interactable = true;
         pauseCanvasGroup.blocksRaycasts = true;
-        //SetInputMap("UI");
+
+        gameCanvasGroup.alpha = 0f;
+        gameCanvasGroup.interactable = false;
+        gameCanvasGroup.blocksRaycasts = false;
+
         ChangeToUIActions();
         isPlay = false;
         Debug.Log("The game was paused");
     }
-    private void ResumeGame(InputAction.CallbackContext callbackContext)
+    private void ResumeGame(InputAction.CallbackContext context)
     {
         ResumeGame();
     }
@@ -99,15 +109,12 @@ public class GameManager : MonoBehaviour
     private void ResumeGame()
     {
         Time.timeScale = 1;
-        //pausePannel.SetActive(false);
         pauseCanvasGroup.alpha = 0f;
         pauseCanvasGroup.interactable = false;
         pauseCanvasGroup.blocksRaycasts = false;
-        //gamePannel.SetActive(true);
         gameCanvasGroup.alpha = 1f;
         gameCanvasGroup.interactable = true;
         gameCanvasGroup.blocksRaycasts = true;
-        //SetInputMap("Base");
         ChangeToBaseActions();
         isPlay = true;
         Debug.Log("The game was continued");
@@ -130,8 +137,6 @@ public class GameManager : MonoBehaviour
     }
     public void LoseGame()
     {
-        // gameOverManager.GameOver();
         GameOverManager.Instance.GameOver();
-        // losePannel.SetActive(true);
     }
 }
