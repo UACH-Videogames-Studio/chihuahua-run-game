@@ -27,35 +27,61 @@ public class GameManager : MonoBehaviour
             return playerScript;
         }
     }
-    public void SetPanels()
+    //public void SetPanels()
+    //{
+    //    //pausePannel = pannelsScriptableObjects.PausePannel;
+    //    //gamePannel = pannelsScriptableObjects.GamePannel;
+    //    //winPannel = pannelsScriptableObjects.WinPannel;
+    //    //losePannel = pannelsScriptableObjects.LosePannel;
+    //    GameObject.Find("PausePannel");
+    //    GameObject.Find("GamePannel");
+    //    GameObject.Find("WinPannel");
+    //    GameObject.Find("LosePannel");
+    //    gameCanvasGroup = gamePannel.GetComponent<CanvasGroup>();
+    //    pauseCanvasGroup = pausePannel.GetComponent<CanvasGroup>();
+    //    timeMultiplier = 1;
+    //    isPlay = true;
+    //    winPannel.SetActive(false);
+    //    losePannel.SetActive(false);
+    //    pauseCanvasGroup.alpha = 0f;
+    //    pauseCanvasGroup.interactable = false;
+    //    pauseCanvasGroup.blocksRaycasts = false;
+    //    gameCanvasGroup.alpha = 1f;
+    //    gameCanvasGroup.interactable = true;
+    //    gameCanvasGroup.blocksRaycasts = true;
+    //}
+
+    public void SetPanels(
+     GameObject pausePanelObj,
+     GameObject gamePanelObj,
+     GameObject winPanelObj,
+     GameObject losePanelObj)
     {
-        //pausePannel = pannelsScriptableObjects.PausePannel;
-        //gamePannel = pannelsScriptableObjects.GamePannel;
-        //winPannel = pannelsScriptableObjects.WinPannel;
-        //losePannel = pannelsScriptableObjects.LosePannel;
-        GameObject.Find("PausePannel");
-        GameObject.Find("GamePannel");
-        GameObject.Find("WinPannel");
-        GameObject.Find("LosePannel");
-        gameCanvasGroup = gamePannel.GetComponent<CanvasGroup>();
+        pausePannel = pausePanelObj;
+        gamePannel = gamePanelObj;
+        winPannel = winPanelObj;
+        losePannel = losePanelObj;
+
+        // Y obtienes los CanvasGroup desde cada objeto, si lo deseas
         pauseCanvasGroup = pausePannel.GetComponent<CanvasGroup>();
-        timeMultiplier = 1;
+        gameCanvasGroup = gamePannel.GetComponent<CanvasGroup>();
+        // ...
+
+        // Y pones aquí el “reset” del estado de la UI
+        Time.timeScale = 1;
         isPlay = true;
-        winPannel.SetActive(false);
-        losePannel.SetActive(false);
         pauseCanvasGroup.alpha = 0f;
         pauseCanvasGroup.interactable = false;
         pauseCanvasGroup.blocksRaycasts = false;
         gameCanvasGroup.alpha = 1f;
         gameCanvasGroup.interactable = true;
         gameCanvasGroup.blocksRaycasts = true;
+        winPannel.SetActive(false);
+        losePannel.SetActive(false);
     }
-
-   
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1f; 
-        SetPanels();
         pauseCanvasGroup.alpha = 0f;
         pauseCanvasGroup.interactable = false;
         pauseCanvasGroup.blocksRaycasts = false;
