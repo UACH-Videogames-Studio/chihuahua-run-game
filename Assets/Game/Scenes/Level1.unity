@@ -131,6 +131,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4371282944140045787, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371282944140045787, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneTransitionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4398626259921039561, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -913,11 +921,11 @@ MonoBehaviour:
   gamePannel: {fileID: 135841432}
   winPannel: {fileID: 1103099084}
   losePannel: {fileID: 853334110}
-  playerScript: {fileID: 2097955088}
   gameCanvasGroup: {fileID: 135841438}
   pauseCanvasGroup: {fileID: 135841440}
   timeMultiplier: 0
   isPlay: 0
+  playerScript: {fileID: 2097955088}
 --- !u!1 &1685164432
 GameObject:
   m_ObjectHideFlags: 0

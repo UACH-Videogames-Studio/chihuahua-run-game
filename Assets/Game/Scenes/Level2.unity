@@ -347,6 +347,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c83ae6f0dc7924d419747b666b27105d, type: 3}
     - target: {fileID: 4371282944140045787, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371282944140045787, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneTransitionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371282944140045787, guid: 3caf2dbe9e0186440b4e0ade4b689c03, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level2
       objectReference: {fileID: 0}
@@ -1193,11 +1201,11 @@ MonoBehaviour:
   gamePannel: {fileID: 771882415}
   winPannel: {fileID: 1871260419}
   losePannel: {fileID: 518656376}
-  playerScript: {fileID: 0}
   gameCanvasGroup: {fileID: 771882418}
   pauseCanvasGroup: {fileID: 771882419}
   timeMultiplier: 0
   isPlay: 0
+  playerScript: {fileID: 0}
 --- !u!1 &2086711256
 GameObject:
   m_ObjectHideFlags: 0
